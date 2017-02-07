@@ -212,7 +212,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     git push origin master
     echo -e "\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"
 
-说Windows没有运行脚本环境的你们似乎忘了**Git-Shell**和**Git-Bash**这个东西。。。
+说Windows没有运行脚本环境的，你们似乎忘了**Git-Shell**和**Git-Bash**这个东西。。。
 ![Git-Bash][Git-Bash]
 
 <br>
@@ -365,6 +365,19 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
 3. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
 4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`
+<br>
+**UPDATE**
+既然wenhook关键是要调用那个deploy.sh，为何不在本地`sync.sh`写入一行：ssh root@host 'sh ./deploy.sh'？(''内代表连接上服务器后执行的命令，需要用ssh-keygen实现免密码登录到)
+
+这样一来，在本地push到仓库之后，相当于在vps执行了`sh ./deploy.sh`，唯一缺点就是在`hexo s &`后无法继续输入命令，需要手动 Ctrl - C 断开Shell
+
+    CTRL-A \001   十进制1
+    CTRL-B \002   十进制2
+    ....
+    CTRL-Z \032   十进制26
+    
+那么`echo -e "\003"` 代表在shell中输入Ctrl - C，然而并不成功。。。
+
 <br>
 #### Github上的Webhooks设置
 ![webhook设置][webhook设置]
