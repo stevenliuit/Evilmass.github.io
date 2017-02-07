@@ -6,6 +6,9 @@ tags: Linux
 
 ### 前言
 之前有一个cc域名是Wordpress的，而me域名则是GithubPage + Hexo，可惜me域名过期没钱续费了，两边更新文章也挺麻烦，遂切换到VPS + Hexo + Webhooks
+
+<!--more-->
+
 一时手贱注册N多一年免费域名，前排出（赠）售（送）以下域名，还有个Namecheap的SSL证书
 > [evil0mass.tk][1]
   [evil0mass.me][2]
@@ -181,7 +184,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 > **Webhook**，也就是人们常说的钩子，是一个很有用的工具。你可以通过定制 Webhook 来监测你在 Github.com 上的各种事件，最常见的莫过于**push**事件。如果你设置了一个监测 push 事件的 Webhook（**`deploy.js`**），那么每当你的这个项目有了任何提交，这个 Webhook 都会被触发，这时 Github 就会发送一个 HTTP POST 请求到你配置好的地址（Payload URL），然后执行我们VPS上面同步更新文章的脚本（**`deploy.sh`**）
 
 <br>
-#### 流程：本地执行`sync.sh`推送文章到Github -> Github产生push事件 -> 服务器上的`deploy.js`监听到该事件 -> deploy.js调用`deploy.sh` -> VPS同步文章完毕-> 展示
+#### **自动部署流程**：本地执行`sync.sh`推送文章到Github -> Github产生push事件 -> 服务器上的`deploy.js`监听到该事件 -> deploy.js调用`deploy.sh` -> VPS同步文章完毕-> 展示
 <br>
 #### 注意事项
 * **设置好Wenhooks之后更新文章都在本地进行，最好不要在vps上面执行`git push`或者`hexo d`之类的操作，容易产生conflict**
@@ -191,7 +194,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 * **如果之前是Github-Page + Hexo的方式的话，以后用脚本更新文章，弃用`hexo g -d`的方式**
 
 <br>
-#### **本地配置**
+### **本地配置**
 创建本地推送脚本`vim sync.sh`
 
 #### **sync.sh**:
@@ -226,7 +229,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     .deploy_git/  #之前hexo-deploy-git方式产生的文件夹
 
 <br>
-### 服务器端配置（VPS）
+### 服务器端配置
 需要用到这个模块**github-webhook-handler**：
 
     npm install github-webhook-handler -g
@@ -266,9 +269,9 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 #### 创建同步脚本`deploy.sh`, 该脚本在VPS的主要操作如下： 
 > 等待被deploy.js调用
   kill heox-pid 关闭当前正在运行的hexo进程
-  git-pull 得到仓库的更新内容
+  git-pull 得到仓库的更新文章
   hexo clean
-  hexo generate
+  hexo generate #生成更新文章的页面
   hexo server & 重新启动hexo并在后台运行
   
 ##### deploy.sh
@@ -312,22 +315,24 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     forever list            #列出启动的服务
 
 Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
-`vim /home/Evilmass.github.io/hexo_run.sh`
 
+    vim /home/Evilmass.github.io/blog_run.sh
+##### blog_run.sh
     #!/bin/bash
 
     NUM=`ps -ef | grep '/usr/bin/node /usr/lib/node_modules/forever/bin/monitor /home/Evilmass.github.io/deploy.js' | head -n 1 | awk '{print $2}'`
     if [ -n "$NUM" ];then
         echo "kill running_deploy process pid: $NUM"
-        kill -9 $NUM
+        kill -9 $NUM #forever start多次会产生多个进程，需要kill pid
     else
-        echo "deploy process not found"
+        echo "running_deploy process not found"
     fi
     /usr/bin/forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
-    /usr/bin/node /home/Evilmass.github.io/deploy.js & #启动deploy.js
-    
-赋予脚本可执行的权限     
-`chmod +x hexo_run.sh`
+    cd /home/Evilmass.github.io && hexo s & #启动hexo服务
+
+##### 赋予脚本可执行的权限  
+
+    chmod +x hexo_run.sh
 <br>
 
 ##### hexo_run.service
@@ -338,7 +343,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
   
     [Service]
     Type=forking
-    ExecStart=/bin/sh /home/Evilmass.github.io/hexo_run.sh
+    ExecStart=/bin/sh /home/Evilmass.github.io/blog_run.sh
 
     [Install]
     WantedBy=multi-user.target
@@ -354,7 +359,11 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 `crontab -e`
 
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
-
+**看到这里估计会很懵逼：这3个脚本一个套一个的，到底怎么工作**
+1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
+2. 刚开机没有deploy.js的forever进程于是执行后面的`forever start deploy.js`以及`hexo s &`
+3. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
+4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`，这次找到了deploy.js的forever进程，kill running_deploy-pid，执行`forever start deploy.js`以及`hexo s &`重启服务
 <br>
 #### Github上的Webhooks设置
 ![webhook设置][webhook设置]
