@@ -4,8 +4,6 @@ date: 2017-02-06 00:34:48
 tags: Linux
 ---
 
-# 从Wordpress迁移到Hexo
-
 ### 前言
 之前有一个cc域名是Wordpress的，而me域名则是GithubPage + Hexo，可惜me域名过期没钱续费了，两边更新文章也挺麻烦，遂切换到VPS + Hexo + Webhooks
 一时手贱注册N多一年免费域名，前排出（赠）售（送）以下域名，还有个Namecheap的SSL证书
@@ -291,10 +289,10 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
     NUM=`ps -a | grep hexo | grep -v grep | head -n 1 | awk '{print $1}'` #请验证该行代码能否取出hexo进程的pid，若不能，则需要根据环境修改
     if [ -n "$NUM" ];then
-            echo "kill hexo process pid: $NUM"
+        echo "kill hexo process pid: $NUM"
         kill -9 $NUM
     else
-            echo "hexo process not found"
+        echo "hexo process not found"
     fi
     HEXO_BASH=`which hexo`
     HEXO_CLEAN=${HEXO_BASH}" clean" 
@@ -317,16 +315,17 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 `vim /home/Evilmass.github.io/hexo_run.sh`
 
     #!/bin/bash
-    /usr/bin/forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
-    /usr/bin/node /home/Evilmass.github.op/deploy.js & #启动deploy.js
-    NUM=`ps -a | grep hexo | grep -v grep | head -n 1 | awk '{print $1}'` #重启hexo
+
+    NUM=`ps -ef | grep '/usr/bin/node /usr/lib/node_modules/forever/bin/monitor /home/Evilmass.github.io/deploy.js' | head -n 1 | awk '{print $2}'`
     if [ -n "$NUM" ];then
-        echo "kill hexo process pid: $NUM"
+        echo "kill running_deploy process pid: $NUM"
         kill -9 $NUM
     else
-        echo "hexo process not found"
+        echo "deploy process not found"
     fi
-    cd /home/Evilmass.github.io/ && hexo s &
+    /usr/bin/forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
+    /usr/bin/node /home/Evilmass.github.io/deploy.js & #启动deploy.js
+    
 赋予脚本可执行的权限     
 `chmod +x hexo_run.sh`
 <br>
@@ -354,7 +353,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 ##### 定时重启
 `crontab -e`
 
-    * 22 * * * forever restart /home/Evilmass.github.io/deploy.js #每天晚上22点重启一次
+    * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
 
 <br>
 #### Github上的Webhooks设置
