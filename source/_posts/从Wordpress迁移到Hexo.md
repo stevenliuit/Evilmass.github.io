@@ -4,6 +4,8 @@ date: 2017-02-06 00:34:48
 tags: Linux
 ---
 
+# 从Wordpress迁移到Hexo
+
 ### 前言
 之前有一个cc域名是Wordpress的，而me域名则是GithubPage + Hexo，可惜me域名过期没钱续费了，两边更新文章也挺麻烦，遂切换到VPS + Hexo + Webhooks
 一时手贱注册N多一年免费域名，前排出（赠）售（送）以下域名，还有个Namecheap的SSL证书
@@ -199,8 +201,6 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     #!/bin/bash
     #\033是控制台代码行的输出颜色，这里是绿色
     echo -e "\033[32m [AUTO DEPLOY] deploy hexo start \033[0m"
-    echo -e "\033[32m [AUTO DEPLOY] deploy hexo clean \033[0m"
-    hexo clean
     echo -e "\033[32m [AUTO DEPLOY] hexo generate...  \033[0m"
     hexo g
     echo -e "\033[32m [AUTO DEPLOY] git commit...  \033[0m"
