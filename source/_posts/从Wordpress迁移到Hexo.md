@@ -194,7 +194,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 * **如果之前是Github-Page + Hexo的方式的话，以后用脚本更新文章，弃用`hexo g -d`的方式**
 
 <br>
-### **本地配置**
+### 本地配置
 创建本地推送脚本`vim sync.sh`
 
 #### **sync.sh**:
@@ -218,7 +218,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 <br>
 我们不需要hexo目录全部推送上去，这样仓库会变得很大
 
-#### **.gitignore写入以下内容**
+#### .gitignore写入以下内容
     .DS_Store
     Thumbs.db
     *.log
