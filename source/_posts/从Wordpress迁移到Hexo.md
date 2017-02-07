@@ -53,7 +53,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
         "method":"chacha20",
         "fast_open": true
     }
-##### 配置自启动
+#### 配置自启动
 新建启动脚本文件/etc/systemd/system/shadowsocks.service，内容如下：
 
     [Unit]
@@ -316,7 +316,8 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 
 Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 
-    vim /home/Evilmass.github.io/blog_run.sh
+    vim /home/blog_run.sh 
+**blog_run.sh这个需要放到hexo目录外面，因为执行deploy.sh之后会删除掉目录内的脚本**
 ##### blog_run.sh
     #!/bin/bash
 
@@ -327,12 +328,13 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
     else
         echo "running_deploy process not found"
     fi
-    /usr/bin/forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
+    forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
+    node /home/Evilmass.github.io/deploy.js & #启动forever.js服务
     cd /home/Evilmass.github.io && hexo s & #启动hexo服务
 
 ##### 赋予脚本可执行的权限  
 
-    chmod +x hexo_run.sh
+    chmod +x blog_run.sh
 <br>
 
 ##### hexo_run.service
@@ -343,7 +345,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
   
     [Service]
     Type=forking
-    ExecStart=/bin/sh /home/Evilmass.github.io/blog_run.sh
+    ExecStart=/bin/sh /home/blog_run.sh
 
     [Install]
     WantedBy=multi-user.target
@@ -361,9 +363,9 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
 **看到这里估计会很懵逼：这3个脚本一个套一个的，到底怎么工作**
 1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
-2. 刚开机没有deploy.js的forever进程于是执行后面的`forever start deploy.js`以及`hexo s &`
+2. 刚开机没有deploy.js的forever进程于是执行后面的执行`forever start deploy.js &`和`node deploy.js &`以及`hexo s &`
 3. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
-4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`，这次找到了deploy.js的forever进程，kill running_deploy-pid，执行`forever start deploy.js`以及`hexo s &`重启服务
+4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`，这次找到了deploy.js的forever进程，kill running_deploy-pid，重启3个服务
 <br>
 #### Github上的Webhooks设置
 ![webhook设置][webhook设置]
