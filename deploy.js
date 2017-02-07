@@ -1,6 +1,7 @@
 var http = require('http')
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/', secret: '*TCYZa.lao1L8h' })//secret一定要和github上配置的一致，上面的 path 保持和 GitHub 后台设置的一致
+var handler = createHandler({ path: '/', secret: '*TCYZa.lao1L8h' })
+// 上面的 secret 保持和 GitHub 后台设置的一致
 
 function run_cmd(cmd, args, callback) {
   var spawn = require('child_process').spawn;
@@ -16,7 +17,7 @@ http.createServer(function (req, res) {
     res.statusCode = 404
     res.end('no such location')
   })
-}).listen(7777)//这里看到监听的是7777端口，所以在github上配置的url如果是ip+port的形式，那么port也是7777
+}).listen(7777) //这里监听的是7777端口，所以在github上配置的url如果是ip+port的形式
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
@@ -26,5 +27,6 @@ handler.on('push', function (event) {
   console.log('Received a push event for %s to %s',
     event.payload.repository.name,
     event.payload.ref);
-  run_cmd('/bin/sh', ['./deploy.sh'], function(text){ console.log(text) });//上面那行代码表示执行本文件所在目录下的shell脚本deploy.sh
-    })
+    run_cmd('sh', ['./deploy.sh',event.payload.repository.name], function(text){ console.log(text) });
+}) ///上面那行代码表示执行本文件所在目录下的shell脚本deploy.sh
+

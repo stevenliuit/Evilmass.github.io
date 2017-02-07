@@ -217,7 +217,9 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 
 <br>
 我们不需要hexo目录全部推送上去，这样仓库会变得很大
-
+**deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
+**deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
+**deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
 #### .gitignore写入以下内容
     .DS_Store
     Thumbs.db

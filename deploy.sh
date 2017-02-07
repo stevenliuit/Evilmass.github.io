@@ -13,7 +13,7 @@ git pull
 git checkout master
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
-NUM=`ps -a | grep hexo | grep -v grep | head -n 1 | awk '{print $1}'` #取出hexo进程的pid，请先验证是否得到hexo进程的pid
+NUM=`ps -ef | grep 'hexo' | head -n1 | awk '{print$2}'` #取出hexo进程的pid，请先验证是否得到hexo进程的pid
 if [ -n "$NUM" ];then
         echo "kill hexo process pid: $NUM"
     kill -9 $NUM
