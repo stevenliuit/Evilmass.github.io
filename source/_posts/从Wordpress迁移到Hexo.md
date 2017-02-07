@@ -287,7 +287,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     cd $WEB_PATH
     echo "pulling source code..."
     git reset --hard origin/master
-    git clean -f
+    #git clean -f 这一句请注释掉，否则服务器端的deploy.sh deploy.js在执行git pull操作时被删除
     git pull
     git checkout master
     echo "changing permissions..."
