@@ -317,7 +317,8 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 `vim /home/Evilmass.github.io/hexo_run.sh`
 
     #!/bin/bash
-    /usr/bin/forever start /home/Evilmass.github.io/deploy.js #开启forever
+    /usr/bin/forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
+    /usr/bin/node /home/Evilmass.github.op/deploy.js & #启动deploy.js
     NUM=`ps -a | grep hexo | grep -v grep | head -n 1 | awk '{print $1}'` #重启hexo
     if [ -n "$NUM" ];then
         echo "kill hexo process pid: $NUM"
