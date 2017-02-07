@@ -16,7 +16,7 @@ http.createServer(function (req, res) {
     res.statusCode = 404
     res.end('no such location')
   })
-}).listen(7777)//这里看到监听的是6666端口，所以在github上配置的url如果是ip+port的形式，那么port也是7777
+}).listen(7777)//这里看到监听的是7777端口，所以在github上配置的url如果是ip+port的形式，那么port也是7777
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
@@ -26,5 +26,5 @@ handler.on('push', function (event) {
   console.log('Received a push event for %s to %s',
     event.payload.repository.name,
     event.payload.ref);
-  run_cmd('/bin/sh', ['sh /home/Evilmass.github.io/deploy.sh'], function(text){ console.log(text) });//上面那行代码表示执行本文件所在目录下的shell脚本deploy.sh
+  run_cmd('/bin/sh', ['/home/Evilmass.github.io/deploy.sh'], function(text){ console.log(text) });//上面那行代码表示执行本文件所在目录下的shell脚本deploy.sh
     })
