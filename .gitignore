@@ -2,9 +2,7 @@
 Thumbs.db
 *.log
 sync.sh
-blog_run.sh
-deploy.js
-deploy.sh
+server/
 *./
 node_modules/
 public/
