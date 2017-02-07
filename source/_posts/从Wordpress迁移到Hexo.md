@@ -408,6 +408,21 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 <br>
 ### [**服务器监控 UptimeRobot 简明使用手册**][12]
 
+###备份
+Hexo备份的话以下几个足矣：
+> Hexo根目录下的`_config.yml`
+
+> 要使用的主题目录下的`_config.yml`
+  
+> 保存文章的`md`文件
+  
+> 本地推送的脚本`sync.sh`
+  
+> 服务器端的`deploy.sh` `deploy.js` `blog_run.sh`
+  
+ 
+ 另外可以创建一个私有仓库把整个hexo目录push上去，记住不要上传deploy.js（或者修改port和secret上传）
+
 <br><br>
 > **这个打赏二维码好像有什么不对**
 
