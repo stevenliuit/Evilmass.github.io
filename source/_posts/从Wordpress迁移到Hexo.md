@@ -290,7 +290,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     git checkout master
     echo "changing permissions..."
     chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
-    NUM=`ps -a | grep hexo | grep -v grep | head -n 1 | awk '{print $1}'` #请验证该行代码能否取出hexo进程的pid，若不能，则需要根据环境修改
+    NUM=`ps -ef | grep 'hexo' | head -n1 | awk '{print$2}'` #请验证该行代码能否取出hexo进程的pid，若不能，则需要根据环境修改
     if [ -n "$NUM" ];then
         echo "kill hexo process pid: $NUM"
         kill -9 $NUM
