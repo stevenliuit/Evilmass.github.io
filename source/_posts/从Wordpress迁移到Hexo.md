@@ -264,7 +264,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
       console.log('Received a push event for %s to %s',
         event.payload.repository.name,
         event.payload.ref);
-      run_cmd('/bin/sh', ['./deploy.sh'], function(text){ console.log(text) }); //上调用所在目录下的deploy.sh脚本
+      run_cmd('/bin/sh', ['/home/Evilmass.github.io/deploy.sh'], function(text){ console.log(text) }); //上调用所在目录下的deploy.sh脚本
         })
 #### 创建同步脚本`deploy.sh`, 该脚本在VPS的主要操作如下： 
 > 等待被deploy.js调用
