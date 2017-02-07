@@ -322,17 +322,9 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 **blog_run.sh这个需要放到hexo目录外面，因为执行deploy.sh之后会删除掉目录内的脚本**
 ##### blog_run.sh
     #!/bin/bash
-
-    NUM=`ps -ef | grep '/usr/bin/node /usr/lib/node_modules/forever/bin/monitor /home/Evilmass.github.io/deploy.js' | head -n 1 | awk '{print $2}'`
-    if [ -n "$NUM" ];then
-        echo "kill running_deploy process pid: $NUM"
-        kill -9 $NUM #forever start多次会产生多个进程，需要kill pid
-    else
-        echo "running_deploy process not found"
-    fi
-    forever start /home/Evilmass.github.io/deploy.js #为deploy.js开启forever
-    node /home/Evilmass.github.io/deploy.js & #启动forever.js服务
-    cd /home/Evilmass.github.io && hexo s & #启动hexo服务
+    
+    forever start /home/Evilmass.github.io/deploy.js 
+    cd /home/Evilmass.github.io && hexo s &
 
 ##### 赋予脚本可执行的权限  
 
@@ -365,9 +357,8 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
 **看到这里估计会很懵逼：这3个脚本一个套一个的，到底怎么工作**
 1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
-2. 刚开机没有deploy.js的forever进程于是执行后面的执行`forever start deploy.js &`和`node deploy.js &`以及`hexo s &`
 3. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
-4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`，这次找到了deploy.js的forever进程，kill running_deploy-pid，重启3个服务
+4. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`
 <br>
 #### Github上的Webhooks设置
 ![webhook设置][webhook设置]
@@ -402,7 +393,8 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
         gzip_vary on;  #跟Squid等缓存服务有关，on的话会在Header里增加"Vary: Accept-Encoding"
         gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
     }
-
+    
+<br>
 ###  [**在Centos配置ngrok**][20]
 
 <br>
