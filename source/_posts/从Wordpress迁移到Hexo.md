@@ -322,7 +322,13 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 **blog_run.sh这个需要放到hexo目录外面，因为执行deploy.sh之后会删除掉目录内的脚本**
 ##### blog_run.sh
     #!/bin/bash
-    
+    NUM=`ps -ef | grep '/usr/bin/node /usr/lib/node_modules/forever/bin/monitor /home/Evilmass.github.io/deploy.js' | head -n 1 | awk '{print $2}'`
+    if [ -n "$NUM" ];then
+        echo "kill running_deploy process pid: $NUM"
+        kill -9 $NUM #forever start多次会产生多个进程，需要kill pid
+    else
+        echo "running_deploy process not found"
+    fi
     forever start /home/Evilmass.github.io/deploy.js 
     cd /home/Evilmass.github.io && hexo s &
 
