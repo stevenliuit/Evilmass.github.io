@@ -18,10 +18,20 @@ tags: Linux
   [evilmass.cn----这个没有实名认证白送了一块钱给腾讯][7]
   
 <br>
-#### VPS基本参数
-VPS：Bandwagonhost China-Direct
-System Version： Centos 7 x86_64
+### VPS基本参数
+对，搬砖，最便宜的那个，现在出了CHINA DIRECT ROUTE，内存也提升到了512M，性价比极高，可惜不是KVM架构。。。
 
+> SPECIAL 10G PROMO V3 - LOS ANGELES - CHINA DIRECT ROUTE 
+  SSD: 10 GB RAID-10
+  RAM: 512 MB
+  CPU: 1x Intel Xeon
+  Transfer: 1000 GB/mo
+  Link speed: 1 Gigabit
+  Location: Los Angeles (no other locations available on this plan)
+  Direct route via China Telecom and China Unicom
+
+我的推荐链接：https://bandwagonhost.com/aff.php?aff=13364
+China-Direct-Route：打开后在最后添加`/cart.php`
 <br>
 ### Shadowsocks
     yum update -y
@@ -481,19 +491,16 @@ crond是Centos系统的 一个服务，也就也就意味着：
 
 -p 代表端口，默认22， 引号内代表连接上服务器后执行的命令，**需要用ssh-keygen实现免密码登录**
 
-在Shell可以进行如下操作
+那么整个工作流就很简单了： 开启启动hexo服务`pm2 startup`，crontab定时执行`pm2 restart app`，本地`sync.sh`推送，服务器端实时更新文章～
+#### 在Shell中执行Ctrl - C
 
     CTRL-A \001   十进制1
     CTRL-B \002   十进制2
     ....
     CTRL-Z \032   十进制26
-    
-那么`echo -e "\003"` 代表在Shell中输入Ctrl - C，**然而并不成功。。。**
+    那么`echo -e "\003"` 代表在Shell中输入Ctrl - C
 
-这样一来，在本地push到仓库之后，相当于在vps执行了`sh ./deploy.sh`，唯一缺点就是在`hexo s &`后无法继续输入命令，需要手动 Ctrl - C 断开Shell
-
-
-那么整个工作流就很简单了： 开启启动hexo服务`pm2 startup`，crontab定时执行`pm2 restart app`，本地`sync.sh`推送，服务器端实时更新文章～
+添加`echo -e "\003"`到deploy.sh最后就可以达到本地推送完成之后自动退出VPS的Shell连接
 <br>
 > **这个打赏二维码好像有什么不对**
 
