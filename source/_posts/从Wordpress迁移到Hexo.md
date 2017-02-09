@@ -424,7 +424,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 `crontab -e`
 
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
-  
+
 **看到这里估计会很懵逼：这3个脚本一个套一个的，到底怎么工作**
 1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
 2. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
@@ -437,7 +437,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 <br>
 ### 验证是否生效
 
-##### 服务端启动脚本
+#### 服务端启动脚本
 
     sh blog_run.sh
 <br>
@@ -447,7 +447,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
     sh sync.sh
 
 <br>
-#####  查看Webhook Response和站点是否更新文章
+####  查看Webhook Response和站点是否更新文章
 ![webhook设置成功][webhook设置成功]
 <br>
 ![文章更新成功][文章更新成功]
