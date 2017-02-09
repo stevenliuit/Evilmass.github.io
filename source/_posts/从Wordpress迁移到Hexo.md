@@ -4,7 +4,6 @@ date: 2017-02-06 00:34:48
 tags: Linux
 ---
 
-
 ### 前言
 之前有一个cc域名是Wordpress的，而me域名则是GithubPage + Hexo，可惜me域名过期没钱续费了，两边更新文章也挺麻烦，遂切换到VPS + Hexo + Webhooks
 
@@ -111,7 +110,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
  
 <br>
 ### [NodeJS][16]
-建议yum直接安装，否则在后面部署forever后台运行hexo的过程中会出现如下错误：
+建议yum直接安装，否则在后面部署pm2（forever）过程中会出现如下错误：
 > /usr/bin/env: node: No such file or directory
 
     yum install nodejs
@@ -190,7 +189,7 @@ crond是Centos系统的 一个服务，也就也就意味着：
 **crontab -e之后Command不执行的原因之一是系统没有开启crond服务**
 
     systemctl start crond
-    systemctl start crond #加入开机启动
+    systemctl enable crond #加入开机启动
 <br>
 ### [Let's Encrypt][19]
 #### 证书自动续期
