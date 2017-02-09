@@ -424,13 +424,14 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 `crontab -e`
 
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
+  
 **看到这里估计会很懵逼：这3个脚本一个套一个的，到底怎么工作**
-> `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
-  forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
-  crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`
+1. `systemctl enable hexo_run`，VPS开机执行`blog_run.sh`
+2. forever会守护`deploy.js`进程，监听push事件来调用`deploy.sh`
+3. crontab每天重启一次`hexo_run`这个服务，再次执行`blog_run.sh`
 
 <br>
-#### Github上的Webhooks设置
+### Github上的Webhooks设置
 ![webhook设置][webhook设置]
 
 <br>
