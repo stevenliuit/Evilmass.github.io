@@ -31,7 +31,7 @@ tags: Linux
   Direct route via China Telecom and China Unicom
 
 我的推荐链接：https://bandwagonhost.com/aff.php?aff=13364
-China-Direct-Route：打开后在最后添加`/cart.php`
+China-Direct-Route：在地址栏最后添加`/cart.php`
 <br>
 ### Shadowsocks
     yum update -y
@@ -125,6 +125,7 @@ China-Direct-Route：打开后在最后添加`/cart.php`
 建议yum直接安装，否则在后面部署pm2（forever）过程中会出现如下错误：
 > /usr/bin/env: node: No such file or directory
 
+####直接安装
     yum install nodejs
 <br>
 #### 二进制包安装
