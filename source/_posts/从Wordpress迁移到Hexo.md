@@ -4,6 +4,7 @@ date: 2017-02-06 00:34:48
 tags: Linux
 ---
 
+
 ### 前言
 之前有一个cc域名是Wordpress的，而me域名则是GithubPage + Hexo，可惜me域名过期没钱续费了，两边更新文章也挺麻烦，遂切换到VPS + Hexo + Webhooks
 
@@ -150,7 +151,46 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     npm install
 
 #### [Next主题][18]
+<br>
+#### 让Hexo在后台运行
 
+    npm install pm2 -g  #全局安装pm2
+当然，用forever也是可以的，只是pm2更强大更好用而已
+
+创建一个`app.js`写入以下内容
+
+    var spawn = require('child_process').spawn;
+        free = spawn('hexo', ['server']);
+
+    free.stdout.on('data', function (data) {
+        console.log('standard output:\n' + data);
+    });
+
+    free.stderr.on('data', function (data) {
+        console.log('standard error output:\n' + data);
+    });
+
+    free.on('exit', function (code, signal) {
+        console.log('child process exit, exit: ' + code);
+    });
+    
+使用
+
+    pm2 list              # 查看已运行的服务
+    pm2 show <id or name> # 查看启动服务的详细信息
+    pm2 monit             # 查看pm2在服务器上的占用
+    pm2 start app.js      # 启动hexo
+    pm2 kill app.js       # 停止hexo   
+    pm2 save              # 保存当前设置
+    pm2 startup           # 开机启动hexo服务
+    
+<br>
+#### crontab注意事项
+crond是Centos系统的 一个服务，也就也就意味着：
+**crontab -e之后Command不执行的原因之一是系统没有开启crond服务**
+
+    systemctl start crond
+    systemctl start crond #加入开机启动
 <br>
 ### [Let's Encrypt][19]
 #### 证书自动续期
@@ -163,6 +203,8 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     crontab -e
     
     * * 1 * * sh /home/ssl_renew.sh
+
+<br>
 #### 配置 Nginx 代理
 作为一个对外公开的网站，使用 4000 端口显然是不合适的。可以直接改成 80 端口，但是这样直接把 Hexo 服务暴露给用户，并不恰当。更好的办法是使用 Nginx 做代理。
     
@@ -180,6 +222,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     service nginx restart
 <br>
 ### Webhooks
+**觉得Webhook太复杂的可以直接看后面UPDATE的内容**
 #### 简单说下Webhooks原理：
 > **Webhook**，也就是人们常说的钩子，是一个很有用的工具。你可以通过定制 Webhook 来监测你在 Github.com 上的各种事件，最常见的莫过于**push**事件。如果你设置了一个监测 push 事件的 Webhook（**`deploy.js`**），那么每当你的这个项目有了任何提交，这个 Webhook 都会被触发，这时 Github 就会发送一个 HTTP POST 请求到你配置好的地址（Payload URL），然后执行我们VPS上面同步更新文章的脚本（**`deploy.sh`**）
 
@@ -310,16 +353,11 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     echo "HEXO_START_SERVER: $HEXO_START_SERVER"
     eval $HEXO_START_SERVER 
     echo "Finished."
-<br>    
-#### 让Hexo在后台运行
-    npm install forever -g  #全局安装forever
-    forever start deploy.js #启动服务
-    forever list            #列出启动的服务
+    
+启动  
 
-Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
-
-    vim /home/blog_run.sh 
-**blog_run.sh这个需要放到hexo目录外面，因为执行deploy.sh之后会删除掉目录内的脚本**
+    pm2 start deploy.js #启动服务
+<br>
 ##### blog_run.sh
     #!/bin/bash
     NUM=`ps -ef | grep '/usr/bin/node /usr/lib/node_modules/forever/bin/monitor /home/Evilmass.github.io/deploy.js' | head -n 1 | awk '{print $2}'`
@@ -329,7 +367,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
     else
         echo "running_deploy process not found"
     fi
-    forever start /home/Evilmass.github.io/deploy.js 
+    pm2 start /home/Evilmass.github.io/deploy.js 
     cd /home/Evilmass.github.io && hexo s &
 
 ##### 赋予脚本可执行的权限  
@@ -338,7 +376,6 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 <br>
 
 ##### hexo_run.service
-`vim /etc/systemd/system/hexo_run.service`
 
     [Unit]
     Description=Hexo Run
@@ -349,6 +386,8 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 
     [Install]
     WantedBy=multi-user.target
+    
+使用
 
     systemctl start hexo_run  #启动服务  
     systemctl enable hexo_run #开机启动
@@ -357,7 +396,8 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 
 执行`systemctl daemon-reload`即可
 
-##### 定时重启
+<br>
+##### crontab定时重启
 `crontab -e`
 
     * 22 * * * systemctl restart hexo_run #每天晚上22点重启一次
@@ -373,7 +413,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 #### 验证是否生效
 ##### 服务端启动脚本
 
-    forever start deploy.js
+    sh blog_run.sh
 ##### 本地执行
 
     hexo new Auto-Push
@@ -385,18 +425,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 <br>
 
 **Done!**（Webhooks配置这里没搞懂工作原理所以浪费超多时间(╯' - ')╯（┻━━┻
-<br>
-### **UPDATE**
-既然wenhook关键是要调用那个deploy.sh，为何不在本地`sync.sh`写入一行：ssh root@host 'sh ./deploy.sh'？(引号内代表连接上服务器后执行的命令，需要用ssh-keygen实现免密码登录到)
 
-这样一来，在本地push到仓库之后，相当于在vps执行了`sh ./deploy.sh`，唯一缺点就是在`hexo s &`后无法继续输入命令，需要手动 Ctrl - C 断开Shell
-
-    CTRL-A \001   十进制1
-    CTRL-B \002   十进制2
-    ....
-    CTRL-Z \032   十进制26
-    
-那么`echo -e "\003"` 代表在shell中输入Ctrl - C，然而并不成功。。。
 <br>
 ### GZip
 `vim /etc/nginx/nginx.conf`
@@ -420,7 +449,7 @@ Centos下Service和/etc/rc.local逐渐被**systemctl**替代了
 
 <br>
 ### 备份
-Hexo备份的话以下几个足矣：
+
 > Hexo根目录下的`_config.yml`
 
 > 要使用的主题目录下的`_config.yml`
@@ -434,7 +463,26 @@ Hexo备份的话以下几个足矣：
  
  另外可以创建一个私有仓库把整个hexo目录push上去，记住不要上传deploy.js（或者修改port和secret上传）
 
-<br><br>
+### **UPDATE**
+既然wenhook关键是要调用那个deploy.sh，为何不在本地`sync.sh`写入一行
+> ssh root@host -p port 'sh ./deploy.sh'  
+
+-p 代表端口，默认22， 引号内代表连接上服务器后执行的命令，**需要用ssh-keygen实现免密码登录**
+
+在Shell可以进行如下操作
+
+    CTRL-A \001   十进制1
+    CTRL-B \002   十进制2
+    ....
+    CTRL-Z \032   十进制26
+    
+那么`echo -e "\003"` 代表在Shell中输入Ctrl - C，**然而并不成功。。。**
+
+这样一来，在本地push到仓库之后，相当于在vps执行了`sh ./deploy.sh`，唯一缺点就是在`hexo s &`后无法继续输入命令，需要手动 Ctrl - C 断开Shell
+
+
+那么整个工作流就很简单了： 开启启动hexo服务`pm2 startup`，crontab定时执行`pm2 restart app`，本地`sync.sh`推送，服务器端实时更新文章～
+<br>
 > **这个打赏二维码好像有什么不对**
 
 **支付宝** 

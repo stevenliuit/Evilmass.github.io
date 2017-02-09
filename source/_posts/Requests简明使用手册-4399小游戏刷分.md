@@ -8,7 +8,7 @@ tags: 爬虫
 > 游戏地址：[黄金矿工双人版][黄金矿工双人版]
  获取Token地址： http://score.4399.com/get_token.php
  提交成绩地址： http://score.4399.com/submitscore_forusercenter.php
- game_key：可惜这个参数要自己手动提交分数才能获取，不然就可以实现页面获取，以后直接输入游戏地址就可以刷分了
+ game_key：可惜这个参数要自己手动提交分数才能获取，不然就可以实现页面获取，直接输入游戏地址刷分
  **verify**：提交分数的验证字符串
  
 <!--more-->
@@ -45,7 +45,7 @@ Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
 <br>
 ![POST具体数据][POST具体数据]
 <br>
-#### 构造verify并验证
+### 构造verify并验证
 
     from hashlib import md5
 
@@ -68,12 +68,10 @@ Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
 
 <br>
 ### POST提交
-
 **POST提交分数请把Cookies带上**
 **POST提交分数请把Cookies带上**
 **POST提交分数请把Cookies带上**
 
-    
     # !/usr/bin/env python3
     # -*- coding:utf-8 -*-
     
@@ -100,8 +98,8 @@ Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
     score_session = requests.Session()
     score = '30000000'  # 得分
     score_data = {
-        'game_id': '3883',
-        'game_key': '38c7d7b60ee491da',
+        'game_id': '3883',  # id
+        'game_key': '38c7d7b60ee491da',  # key
         'gs': '2',
         'Pkid' :'0',
         'autocommit': '1',
@@ -136,7 +134,13 @@ Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
 <br>
 ### Done
 ![刷分成功][刷分成功]
-
+<br>
+**脚本仅作测试，请勿恶意刷分**
+**脚本仅作测试，请勿恶意刷分**
+**脚本仅作测试，请勿恶意刷分**
+<br>
+### Reference
+[教你如何刷 4399 小游戏的分数！][教你如何刷 4399 小游戏的分数！]
 <br>
 > **这个打赏二维码好像有什么不对**
 
@@ -158,4 +162,5 @@ Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
 [抓包分析]:  https://of4jd0bcc.qnssl.com/4399/%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90.png
 [POST具体数据]: https://of4jd0bcc.qnssl.com/4399/POST%E5%85%B7%E4%BD%93%E6%95%B0%E6%8D%AE.png
 [刷分成功]: https://of4jd0bcc.qnssl.com/4399/%E5%88%B7%E5%88%86%E6%88%90%E5%8A%9F.png
+[教你如何刷 4399 小游戏的分数！]: https://www.hrwhisper.me/get-a-good-score-you-like-at-4399/
 
