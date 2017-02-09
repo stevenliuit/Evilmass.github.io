@@ -489,9 +489,46 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 > 本地推送的脚本`sync.sh`
   
 > 服务器端的`deploy.sh` `deploy.js` `blog_run.sh`
-  
- 
- 另外可以创建一个私有仓库把整个hexo目录push上去，记住不要上传deploy.js（或者修改port和secret上传）
+
+#### 七牛qshell
+创建一个私有空间（服务器在国外建议选择北美的空间，已经有空间的，先创建再设置成私有即可），在个人面板 -> 密钥管理找到  `AccessKey`和`SecretKey`
+
+##### 下载服务器可用的[qshell][qshell下载地址]并初始化
+
+    ./qshell_linux_amd64 init AK SK
+
+##### 在当前目录下创建`config.txt`并写入如下内容
+
+    {
+        "src_dir"            :   "待同步的目录",
+        "access_key"         :   "AK",
+        "secret_key"         :   "SK",
+        "bucket"             :   "私有空间名",
+        "zone"               :   "na0",
+        "rescan_local"       :   true,
+        "skip_path_prefixes" :   ".qshell"
+    }
+各机房对应的zone值
+
+    华东      nb
+    华北      bc
+    华南      hn
+    北美      na0
+##### 上传备份文件到私有空间
+一般选择source/_posts里面的文章做备份，配置文件_config.yml不建议上传
+
+    ./qshell_linux_amd64 qupload config.txt
+
+##### 写成脚本最后加入到crontab一天更新一次
+    * 22 * * * sh ~/hexo-backup/backup2qiniu.sh
+    
+##### 更多细节请参考[qshell官方文档][qshell官方文档]
+
+ <br>
+#### Github + Webhooks
+这个简单，创建**私有仓库**，设置好webhooks，一旦github有push evevt就执行备份操作
+
+代码？**自己动手操作一次吧**（记得用pm2）～
 
 <br>
 ### **UPDATE**
@@ -545,6 +582,8 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
   [webhook设置]: https://of4jd0bcc.qnssl.com/Hexo/webhook%E8%AE%BE%E7%BD%AE.png
   [webhook设置成功]: https://of4jd0bcc.qnssl.com/Hexo/webhook%E8%AE%BE%E7%BD%AE%E6%88%90%E5%8A%9F.png
   [文章更新成功]: https://of4jd0bcc.qnssl.com/Hexo/%E6%96%87%E7%AB%A0%E6%9B%B4%E6%96%B0%E6%88%90%E5%8A%9F.png
+ [qshell下载地址]: https://developer.qiniu.com/kodo/tools/qshell#download
+ [qshell官方文档]: https://github.com/qiniu/qshell/blob/master/docs/qupload.md
 
   [99]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/alipay/%E7%86%8A%E6%9C%AC%E7%86%8A%E8%B6%85%E5%B8%85_alipay.gif?imageView2/1/w/200/h/200
   [100]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/wechat/girl_wechat.gif?imageView2/1/w/200/h/200
