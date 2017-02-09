@@ -242,11 +242,11 @@ crond是Centos系统的 一个服务，也就也就意味着：
 **觉得Webhook太复杂的可以直接看后面UPDATE的内容**
 **觉得Webhook太复杂的可以直接看后面UPDATE的内容**
 
-#### 简单说下Webhooks原理：
+#### 简单说下Webhooks原理
 > **Webhook**，也就是人们常说的钩子，是一个很有用的工具。你可以通过定制 Webhook 来监测你在 Github.com 上的各种事件，最常见的莫过于**push**事件。如果你设置了一个监测 push 事件的 Webhook（**`deploy.js`**），那么每当你的这个项目有了任何提交，这个 Webhook 都会被触发，这时 Github 就会发送一个 HTTP POST 请求到你配置好的地址（Payload URL），然后执行我们VPS上面同步更新文章的脚本（**`deploy.sh`**）
 
 <br>
-#### **自动部署流程**：本地执行`sync.sh`推送文章到Github -> Github产生push事件 -> 服务器上的`deploy.js`监听到该事件 -> deploy.js调用`deploy.sh` -> VPS同步文章完毕-> 展示
+**自动部署流程**：本地执行`sync.sh`推送文章到Github -> Github产生push事件 -> 服务器上的`deploy.js`监听到该事件 -> deploy.js调用`deploy.sh` -> VPS同步文章完毕-> 展示
 <br>
 #### 注意事项
 * **设置好Wenhooks之后更新文章都在本地进行，最好不要在vps上面执行`git push`或者`hexo d`之类的操作，容易产生conflict**
@@ -276,12 +276,11 @@ crond是Centos系统的 一个服务，也就也就意味着：
 
 说Windows没有运行脚本环境的，你们似乎忘了**Git-Shell**和**Git-Bash**这个东西。。。
 ![Git-Bash][Git-Bash]
-
 <br>
-我们不需要hexo目录全部推送上去，这样仓库会变得很大
 **deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
 **deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
 **deploy.js包含Webhook的密码，绝对不可以推送到仓库去**
+这一点很重要，包含密码的私有文件或者ssh密匙不能推送到公共仓库，会造成隐私泄漏等安全问题
 #### .gitignore写入以下内容
     .DS_Store
     Thumbs.db
@@ -291,7 +290,10 @@ crond是Centos系统的 一个服务，也就也就意味着：
     node_modules/ #Hexo的运行环境
     public/ #hexo generate产生的静态页面
     .deploy_git/  #之前hexo-deploy-git方式产生的文件夹
-
+Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送上去，这样整个仓库会变得很大，不利于其他服务器部署
+#### 多机器配置（需要NodeJS环境)
+    git clone 仓库
+    npm install
 <br>
 ### 服务器端配置
 需要用到这个模块**github-webhook-handler**：
