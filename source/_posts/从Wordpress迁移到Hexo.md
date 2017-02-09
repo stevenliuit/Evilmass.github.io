@@ -18,15 +18,16 @@ tags: Linux
   [evilmass.cn----这个没有实名认证白送了一块钱给腾讯][7]
   
 <br>
+#### VPS基本参数
 VPS：Bandwagonhost China-Direct
-System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都设置不好，残念～
-关键字：**systemctl enable**
+System Version： Centos 7 x86_64
+
 <br>
 ### Shadowsocks
     yum update -y
     yum install python-setuptools m2crypto libtool gcc && easy_install pip
     pip install shadowsocks
-
+<br>
 #### libsodium依赖
     curl -O -L https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
     tar zxf LATEST.tar.gz
@@ -37,7 +38,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
     ldconfig
     rm -rfv ../LATEST.tar.gz ../libsodium* && cd ~
-    
+<br>   
 #### 多端口配置
     {
         "server":"0.0.0.0",
@@ -53,6 +54,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
         "method":"chacha20",
         "fast_open": true
     }
+<br>
 #### 配置自启动
 新建启动脚本文件/etc/systemd/system/shadowsocks.service，内容如下：
 
@@ -66,6 +68,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     [Install]
     WantedBy=multi-user.target
     
+<br>
 #### 启动 shadowsocks
 
     systemctl enable shadowsocks  #开机启动
@@ -74,8 +77,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 为了检查 shadowsocks服务是否已成功启动，可以执行以下命令查看服务的状态：
 
     systemctl status shadowsocks -l
-    
- <br>   
+<br>   
 #### Shadowsocks优化
 **Openvz用户可以不用看这部分的优化**
 
@@ -114,15 +116,18 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
 > /usr/bin/env: node: No such file or directory
 
     yum install nodejs
+<br>
 #### 二进制包安装
     cd /home
     wget https://nodejs.org/dist/v7.5.0/node-v7.5.0-linux-x64.tar.xz
     tar -xf node-v7.5.0-linux-x64.tar.xz
     ./node-v7.5.0-linux-x64/bin/node -v
 输出`v7.5.0`即可
+<br>
 ##### 软连接
     ln -s /home/node-v7.5.0-linux-x64/bin/node /usr/local/bin/node
     ln -s /home/node-v7.5.0-linux-x64/bin/npm /usr/local/bin/npm
+<br>
 ##### 添加到PATH
     vim /etc/profile
     
@@ -131,7 +136,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     
     #即刻生效
     source /etc/profile 
-
+<br>
 #### 源码编译安装（你这样是要被电的。。。
 
     yum install gcc-c++ screen  #在耗时较多的任务又怕shell断开连接，可以开启screen
@@ -148,7 +153,7 @@ System Version： Centos 7 x86_64（之前Centos的脚本开机启动怎么都�
     hexo init blog
     cd blog
     npm install
-
+<br>
 #### [Next主题][18]
 <br>
 #### 让Hexo在后台运行
@@ -191,8 +196,8 @@ crond是Centos系统的 一个服务，也就也就意味着：
     systemctl start crond
     systemctl enable crond #加入开机启动
 <br>
-### [Let's Encrypt][19]
-#### 证书自动续期
+### [Let's Encrypt][19]证书自动续期
+
     vim /home/ssl_renew.sh
     
     #!/bin/bash
@@ -219,9 +224,13 @@ crond是Centos系统的 一个服务，也就也就意味着：
 重启 Nginx：
 
     service nginx restart
+
 <br>
 ### Webhooks
 **觉得Webhook太复杂的可以直接看后面UPDATE的内容**
+**觉得Webhook太复杂的可以直接看后面UPDATE的内容**
+**觉得Webhook太复杂的可以直接看后面UPDATE的内容**
+
 #### 简单说下Webhooks原理：
 > **Webhook**，也就是人们常说的钩子，是一个很有用的工具。你可以通过定制 Webhook 来监测你在 Github.com 上的各种事件，最常见的莫过于**push**事件。如果你设置了一个监测 push 事件的 Webhook（**`deploy.js`**），那么每当你的这个项目有了任何提交，这个 Webhook 都会被触发，这时 Github 就会发送一个 HTTP POST 请求到你配置好的地址（Payload URL），然后执行我们VPS上面同步更新文章的脚本（**`deploy.sh`**）
 
@@ -239,7 +248,7 @@ crond是Centos系统的 一个服务，也就也就意味着：
 ### 本地配置
 创建本地推送脚本`vim sync.sh`
 
-#### **sync.sh**:
+#### sync.sh:
 
     #!/bin/bash
     #\033是控制台代码行的输出颜色，这里是绿色
@@ -277,7 +286,7 @@ crond是Centos系统的 一个服务，也就也就意味着：
 需要用到这个模块**github-webhook-handler**：
 
     npm install github-webhook-handler -g
-
+<br>
 #### 监听push事件的`deploy.js`脚本：
 
     var http = require('http')
@@ -310,6 +319,7 @@ crond是Centos系统的 一个服务，也就也就意味着：
         event.payload.ref);
       run_cmd('/bin/sh', ['/home/Evilmass.github.io/deploy.sh'], function(text){ console.log(text) }); //上调用所在目录下的deploy.sh脚本
         })
+<br>
 #### 创建同步脚本`deploy.sh`, 该脚本在VPS的主要操作如下： 
 > 等待被deploy.js调用
   kill heox-pid 关闭当前正在运行的hexo进程
@@ -317,7 +327,8 @@ crond是Centos系统的 一个服务，也就也就意味着：
   hexo clean
   hexo generate #生成更新文章的页面
   hexo server & 重新启动hexo并在后台运行
-  
+
+<br>
 ##### deploy.sh
     #!/bin/bash
     PORT=4000
@@ -413,10 +424,12 @@ crond是Centos系统的 一个服务，也就也就意味着：
 ##### 服务端启动脚本
 
     sh blog_run.sh
+<br>
 ##### 本地执行
 
     hexo new Auto-Push
     sh sync.sh
+<br>
 #####  查看Webhook Response和站点是否更新文章
 ![webhook设置成功][webhook设置成功]
 <br>
