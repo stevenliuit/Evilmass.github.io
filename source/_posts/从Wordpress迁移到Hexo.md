@@ -126,6 +126,7 @@ China-Direct-Route：在地址栏最后添加`/cart.php`
 > /usr/bin/env: node: No such file or directory
 
 ####直接安装
+
     yum install nodejs
 <br>
 #### 二进制包安装
