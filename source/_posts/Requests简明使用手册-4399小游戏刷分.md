@@ -14,7 +14,7 @@ tags: 爬虫
 <!--more-->
 
 <br>
-#### 获取Flash
+### 获取Flash
 Chrome -> F12 -> Network -> 查找`*.swf` -> 得到游戏地址
 > 这里有个坑：黄金矿工的swf文件是没有加密函数的！所以我们找找别的的swf：[Flappy Bird][Flappy Bird]
 
