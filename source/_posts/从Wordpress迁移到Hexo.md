@@ -259,7 +259,7 @@ crond是Centos系统的 一个服务，也就也就意味着：
 ### 本地配置
 创建本地推送脚本`vim sync.sh`
 
-#### sync.sh:
+#### sync.sh
 
     #!/bin/bash
     #\033是控制台代码行的输出颜色，这里是绿色
@@ -414,7 +414,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 
     systemctl start hexo_run  #启动服务  
     systemctl enable hexo_run #开机启动
-如果多次修改hexo_run.service，那么启动服务的话可能出现如下内容：
+如果多次修改hexo_run.service，那么启动服务的话可能出现如下内容
 > Warning: hexo_run.service changed on disk. Run '**systemctl daemon-reload**' to reload units.
 
 执行`systemctl daemon-reload`即可
