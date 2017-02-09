@@ -125,8 +125,7 @@ China-Direct-Route：在地址栏最后添加`/cart.php`
 建议yum直接安装，否则在后面部署pm2（forever）过程中会出现如下错误：
 > /usr/bin/env: node: No such file or directory
 
-####直接安装
-
+#### 直接安装
     yum install nodejs
 <br>
 #### 二进制包安装
