@@ -453,6 +453,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 
 <br>
 ### GZip
+
 `vim /etc/nginx/nginx.conf`
     
     http {
@@ -465,7 +466,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
         gzip_vary on;  #跟Squid等缓存服务有关，on的话会在Header里增加"Vary: Accept-Encoding"
         gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
     }
-    
+  
 <br>
 ###  [**在Centos配置ngrok**][20]
 
@@ -488,6 +489,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
  
  另外可以创建一个私有仓库把整个hexo目录push上去，记住不要上传deploy.js（或者修改port和secret上传）
 
+<br>
 ### **UPDATE**
 既然wenhook关键是要调用那个deploy.sh，为何不在本地`sync.sh`写入一行
 > ssh root@host -p port 'sh ./deploy.sh'  
@@ -504,6 +506,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
     那么`echo -e "\003"` 代表在Shell中输入Ctrl - C
 
 添加`echo -e "\003"`到deploy.sh最后就可以达到本地推送完成之后自动退出VPS的Shell连接
+
 <br>
 > **这个打赏二维码好像有什么不对**
 
