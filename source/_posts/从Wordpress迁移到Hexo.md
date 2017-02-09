@@ -300,7 +300,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 
     npm install github-webhook-handler -g
 <br>
-#### 监听push事件的`deploy.js`脚本：
+#### 监听push事件的`deploy.js`脚本
 
     var http = require('http')
     var createHandler = require('github-webhook-handler')
@@ -333,7 +333,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
       run_cmd('/bin/sh', ['/home/Evilmass.github.io/deploy.sh'], function(text){ console.log(text) }); //上调用所在目录下的deploy.sh脚本
         })
 <br>
-#### 创建同步脚本`deploy.sh`, 该脚本在VPS的主要操作如下： 
+#### 创建同步脚本`deploy.sh`, 该脚本在VPS的主要操作如下 
 > 等待被deploy.js调用
   kill heox-pid 关闭当前正在运行的hexo进程
   git-pull 得到仓库的更新文章
@@ -433,7 +433,7 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 #### Github上的Webhooks设置
 ![webhook设置][webhook设置]
 <br>
-#### 验证是否生效
+### 验证是否生效
 ##### 服务端启动脚本
 
     sh blog_run.sh
