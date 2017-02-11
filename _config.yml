@@ -10,9 +10,13 @@ author: Evilmass
 language: zh-Hans
 timezone:
 
+#SiteMap
+sitemap:
+  path: sitemap.xml
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: evilmass.cc
+url: https://evilmass.cc
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
