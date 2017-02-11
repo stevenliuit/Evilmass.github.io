@@ -10,6 +10,14 @@ author: Evilmass
 language: zh-Hans
 timezone:
 
+# Extensions
+# plugins:
+# - hexo-generator-sitemap
+# - hexo-generator-baidu-sitemap
+
+# baidusitemap:
+#   path: baidusitemap.xml
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://evilmass.cc
@@ -72,6 +80,3 @@ theme: next
 #   type: git
 #   repo: git@github.com:Evilmass/Evilmass.github.io.git
 #   branch: master
-
-sitemap:
-    path: sitemap.xml
