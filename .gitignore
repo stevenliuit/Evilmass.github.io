@@ -2,6 +2,8 @@
 Thumbs.db
 *.log
 sync.sh
+_config.yml
+package.json
 server/
 *./
 node_modules/

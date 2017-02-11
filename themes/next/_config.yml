@@ -129,7 +129,8 @@ social_icons:
   enable: true
   # Icon Mappings.
   # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
+  GitHub: https://github.com/Evilmass
+  Email: "mailto:evilmass1ve@gmail.com"
   # Twitter: twitter
   # Weibo: weibo
 
@@ -226,8 +227,8 @@ auto_excerpt:
 
 # MathJax Support
 mathjax:
-  enable: false
-  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  enable: true
+  cdn: http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
 # Swiftype Search API Key
