@@ -15,7 +15,11 @@ keywords: "Hi I'm Evilmass Welcome~"
 # Specify the date when the site was setup
 #since: 2015
 
-
+#SiteMap
+sitemap: 
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
 
 
 # ---------------------------------------------------------------

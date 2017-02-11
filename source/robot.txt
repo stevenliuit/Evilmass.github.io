@@ -11,3 +11,4 @@ Disallow: /vendors/
 Disallow: /fancybox/
 
 Sitemap: https://evilmass.cc/sitemap.xml
+Sitemap: https://evilmass.cc/baidusitemap.xml
