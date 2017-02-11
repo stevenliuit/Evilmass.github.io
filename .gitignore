@@ -3,6 +3,7 @@ Thumbs.db
 *.log
 sync.sh
 _config.yml
+db.json
 package.json
 server/
 *./
