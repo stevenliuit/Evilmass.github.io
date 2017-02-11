@@ -5,7 +5,7 @@
 # Put your favicon.ico into `hexo-site/source/` directory.
 favicon: https://of4jd0bcc.qnssl.com/Blog/%E7%89%87%E6%89%8B%E5%89%91.jpg
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "Hi I'm Evilmass Welcome~"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -42,10 +42,10 @@ menu_icons:
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
   about: user
-  # categories: th
-  tags: tags
+  #categories: th
+  #tags: tags
   archives: archive
-  commonweal: heartbeat
+  #commonweal: heartbeat
 
 
 

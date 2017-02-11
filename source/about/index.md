@@ -1,5 +1,5 @@
 ---
-title: about
+title:
 date: 2017-02-11 18:49:17
 ---
 
