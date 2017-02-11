@@ -4,7 +4,6 @@ Thumbs.db
 sync.sh
 _config.yml
 db.json
-package.json
 server/
 *./
 node_modules/
