@@ -1,3 +1,1 @@
-[evilmass.cc][13]
-
-[13]: [https://evilmass.cc]
+<a href="https://evilmass.cc">evilmass.cc</a>
