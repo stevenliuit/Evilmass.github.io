@@ -48,7 +48,7 @@ tags: Linux
 
     git clone https://github.com/inconshreveable/ngrok.git
 
-在使用官方服务的时候，我们使用的是官方的 SSL 证书，所以如果直接编译的话，默认的链接地址会到官方的 ngrok.com 去，所以我们需要自己生成证书。
+在使用官方服务的时候，我们使用的是官方的 SSL 证书，所以如果直接编译的话，默认的连接地址会到官方的 ngrok.com 去，所以我们需要自己生成证书。
 
 **NGROK_DOMAIN这里修改为自己的域名**
 
@@ -106,8 +106,8 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 
     GOOS=windows GOARCH=amd64 make release-client
     
-**GOOS**：当前编译的操作系统 (windows，linux，darwin) 
-**GOARCH**：go编译出来的应用构架 (386，amd64，arm)
+**GOOS**：Target Host OS
+**GOARCH**：Target Host ARCH
 
 > Linux 平台 32 位系统：GOOS=linux GOARCH=386
   Linux 平台 64 位系统：GOOS=linux GOARCH=amd64
@@ -134,7 +134,7 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 
 **httpAddr**：访问普通的http使用的端口号，用后面用`子域名.evilmass.cc:6060` 来访问服务
 **httpsAddr**：访问的https使用的端口号，同上，只不过是需要https的服务访问才用这个端口
-**tunnelAddr**：通道的端口号，**这个端口是Ngrok用来通信的，所以这个端口在服务器上和客户端上设置必须要对应才可以正常的链接**，默认不填写是4433
+**tunnelAddr**：通道的端口号，**这个端口是Ngrok用来通信的，所以这个端口在服务器上和客户端上设置必须要对应才可以正常的连接**，默认不填写是4433
 
     
 ##### 验证端口是否打开
@@ -180,13 +180,13 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 
 启动服务： start `router` `mhp`
 
-如果显示了tunnel status: online就是服务器和客户端是正常链接的
+如果显示了tunnel status: online就是服务器和客户端是正常连接的
 ![多隧道设置][多隧道设置]
 <br>
 如果设定了`auth`，则开启页面需要填写`username`和`password`：
 ![两步认证][两步认证]
 <br>
-通过浏览器访问`http://router.evilmass.cc:6060`就可以链接到现在的内网主机`192.168.1.1:80`上的服务。
+通过浏览器访问`http://router.evilmass.cc:6060`就可以连接到现在的内网主机`192.168.1.1:80`上的服务。
 ![测试隧道][测试隧道]
 
 <br>
