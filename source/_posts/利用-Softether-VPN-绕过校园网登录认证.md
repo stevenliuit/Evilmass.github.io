@@ -1,20 +1,17 @@
 ---
-title: 利用Softether VPN 绕过校园网登录认证
+title: 利用 Softether VPN 绕过校园网登录认证
 date: 2017-03-04 20:54:53
 tags: Hack
 ---
 
 ### Say Something
-原先DNS Tunnel这东西是为了Hack或者不小心封了某个端口的时候拿来绕过防火墙的，之前用iodine感觉比较麻烦
-
-<!--more-->
-
-iodine Kali内置，Debian的话`apt-get`就好了，然后拿自己的域名设置个ns记录和a记录，开了53udp，服务器和客户端分别运行iodined和iodine，最后通过tunnel连接上本地的ss，关键还不是全局代理（滑稽
+原先DNS Tunnel这东西是为了Hack或者不小心封了某个端口的时候拿来绕过防火墙。Kali内置iodine ，Debian的话`apt-get`就好了，然后拿自己的域名设置个ns记录和a记录，开了53udp，服务器和客户端分别运行iodined和iodine，最后通过tunnel连接上本地的ss。感觉挺麻烦，关键还不是全局代理（滑稽
 Docker用法如下
 
     docker run -d --cap-add NET_ADMIN -p 53:53/udp -p  -p 5555:5555/tcp -e USERNAME xxx -e PASSWORD xxx -e SPW 服务端密码 -e HPW 虚拟HUB密码 siomiz/softethervpn
 
-Softether VPN简直就是我这种懒人的福利
+所以说 Softether VPN简直就是我这种懒人的福利
+<!--more-->
 <br>
 
 ### Require
