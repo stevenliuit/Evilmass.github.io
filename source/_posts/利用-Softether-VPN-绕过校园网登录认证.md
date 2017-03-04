@@ -10,7 +10,7 @@ Docker用法如下
 
     docker run -d --cap-add NET_ADMIN -p 53:53/udp -p  -p 5555:5555/tcp -e USERNAME xxx -e PASSWORD xxx -e SPW 服务端密码 -e HPW 虚拟HUB密码 siomiz/softethervpn
 
-所以说 Softether VPN简直就是我这种懒人的福利
+所以对于我这种懒人来说，Softether VPN 什么的最好了
 <!--more-->
 <br>
 
