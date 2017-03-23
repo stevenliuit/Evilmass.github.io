@@ -3,7 +3,6 @@ title: HashTable的Python实现与MongoDB存取
 date: 2017-03-23 17:32:10
 tags: Python
 ---
-# HashTable的Python实现与MongoDB存取
 
 ## Requirement
 *  [MongoDB][MongoDB]
