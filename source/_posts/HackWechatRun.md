@@ -76,4 +76,4 @@ To celebrate joining the **DGUT-GiliGili** organization, i make this repo(233
 [drop_apk]: https://of4jd0bcc.qnssl.com/HackWechatRun/drop_apk.png
 [verify_key]: https://of4jd0bcc.qnssl.com/HackWechatRun/verify_key.png
 [python_code]: https://of4jd0bcc.qnssl.com/HackWechatRun/python_code.png
-[finished]: https://of4jd0bcc.qnssl.com/HackWechatRun/finished.png
+[finished]: https://of4jd0bcc.qnssl.com/HackWechatRun/finished.jpg
