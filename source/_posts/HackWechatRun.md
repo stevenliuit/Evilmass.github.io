@@ -5,7 +5,7 @@ tags: Hack
 ---
 
 ## Saying Something
-To celebrate joining the **[DGUT-GiliGili][DGUT-GiliGili]** organization, i make this repo(233
+Last night, I had been invited the **[DGUT-GiliGili][DGUT-GiliGili]** organization(233
 ![giligili][giligili]
 <br>
 [Repository][repository] => **welcome to pull/request**
