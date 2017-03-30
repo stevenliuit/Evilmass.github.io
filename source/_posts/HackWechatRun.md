@@ -8,8 +8,7 @@ tags: Hack
 To celebrate joining the **DGUT-GiliGili** organization, i make this repo(233
 ![giligili][giligili]
 <br>
-[项目地址][HackWechatRun
-**welcome to pull/request**
+[Repository][repository] => **welcome to pull/request**
 <!--more-->
 
 <br>
@@ -61,13 +60,13 @@ To celebrate joining the **DGUT-GiliGili** organization, i make this repo(233
 [Alipay]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/alipay/shakalaka_ailipay.gif?imageView2/1/w/200/h/200
 [Wechat]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/wechat/patapon_wechat.gif?imageView2/1/w/200/h/200
 
-[HackWechatRun]: https://github.com/Evilmass/HackWechatRun
+[repository]: https://github.com/Evilmass/HackWechatRun
 [giligili]: https://of4jd0bcc.qnssl.com/HackWechatRun/giligili.png
 [Fiddler]: https://www.telerik.com/download/fiddler
 [Ledongli]: http://ledongli.cn/officialWebsite/index_mobile.html
 [One-Key-Decompile-Apk]: https://of4jd0bcc.qnssl.com/HackWechatRun/One-Key-Decompile-Apk.png 
 [setting_proxy]: https://of4jd0bcc.qnssl.com/HackWechatRun/setting_proxy.png
-[mobile_proxy]: https://of4jd0bcc.qnssl.com/HackWechatRun/mobile_proxy.jpg
+[mobile_proxy]: https://of4jd0bcc.qnssl.com/HackWechatRun/mobile_proxy.jpg?imageView2/1/w/500/h/960
 [decompiled]: https://of4jd0bcc.qnssl.com/HackWechatRun/decompiled.png
 [get_post]: https://of4jd0bcc.qnssl.com/HackWechatRun/get_post.png
 [unknown_key]: https://of4jd0bcc.qnssl.com/HackWechatRun/unknown_key.png
