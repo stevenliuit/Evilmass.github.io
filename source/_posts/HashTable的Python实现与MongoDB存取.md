@@ -214,7 +214,6 @@ tags: Python
     
         hashTable.__del__()
 
-![mongo][mongo]
 <br>
 ## Reference
 
@@ -236,6 +235,5 @@ tags: Python
 [1]: https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8
 [2]: http://blog.csdn.net/feixiaoxing/article/details/6885657
 [HashTable]: https://of4jd0bcc.qnssl.com/%E6%9D%82/HashTable.png
-[mongo]: https://of4jd0bcc.qnssl.com/%E6%9D%82/mongodb.png
 [MongoDB]: https://www.mongodb.com/download-center#community
 [pymongo]: https://pypi.python.org/pypi/pymongo/3.4.0
