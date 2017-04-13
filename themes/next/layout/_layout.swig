@@ -51,6 +51,24 @@
     </footer>
 
     <div class="back-to-top">
+      <script>
+        var OriginTitile=document.title;
+        var st;
+        document.addEventListener('visibilitychange',function(){
+        if(document.hidden){
+          document.title="你睇我唔到～";
+          clearTimeout(st);
+          console.log('hide');
+        }else{
+          document.title='宜家睇到啦～ '+OriginTitile;
+          console.log('show');
+          st=setTimeout(function(){
+              document.title=OriginTitile;
+          },4000);
+          console.log('endChange=');
+        }
+        });
+      </script>
       <i class="fa fa-arrow-up"></i>
     </div>
   </div>
