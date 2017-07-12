@@ -9,7 +9,7 @@ tags: Hack
 >网上大部分教程都是用到的最新的gnu-arm-build.3脚本，但这个脚本编译的gcc版本是4.8.2，在Kali2下
 gcc -v，会发现gcc的版本是4.9.2，即便编译成功，会出现如下问题：Osmocom-bb的Master分支能扫描到基站，但wireshark捕获到的全是GSMTAP，没有GSM_SMS。Luca/gsmmap分支则会扫描不到基站。Ubuntu12.04的gcc正好是4.5.2，因此在Ubuntu12.04下，我们用gnu-arm-build.2的脚本就能编译成功
 
-##当然，解决办法还是有的:
+## 当然，解决办法还是有的:
 <!--more-->
 
 ## 修改osmocom-bb以下五个文件
