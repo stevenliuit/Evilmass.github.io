@@ -273,9 +273,26 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
         gzip_vary on;  #跟Squid等缓存服务有关，on的话会在Header里增加"Vary: Accept-Encoding"
         gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
     }
-  
 
 <br>
+### 文章更新工作流
+在本地`sync.sh`写入一行
+> ssh root@host -p port 'sh ./deploy.sh'  
+
+-p 代表端口，默认22， 引号内代表连接上服务器后执行的命令，**需要用ssh-keygen实现免密码登录**
+
+那么整个工作流就很简单了： 开启启动hexo服务`pm2 startup`，crontab定时执行`pm2 restart app`，本地`sync.sh`推送，服务器端实时更新文章～
+#### 在Shell中执行Ctrl - C
+
+    CTRL-A \001   十进制1
+    CTRL-B \002   十进制2
+    ....
+    CTRL-Z \032   十进制26
+    那么`echo -e "\003"` 代表在Shell中输入Ctrl - C
+
+添加`echo -e "\003"`到deploy.sh最后就可以达到本地推送完成之后自动退出VPS的Shell连接
+<br>
+
 ### 备份
 
 > Hexo根目录下的`_config.yml`
@@ -322,26 +339,8 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
     
 ##### 更多细节请参考[qshell官方文档][qshell官方文档]
 
-
 <br>
-### 文章更新工作流
-在本地`sync.sh`写入一行
-> ssh root@host -p port 'sh ./deploy.sh'  
 
--p 代表端口，默认22， 引号内代表连接上服务器后执行的命令，**需要用ssh-keygen实现免密码登录**
-
-那么整个工作流就很简单了： 开启启动hexo服务`pm2 startup`，crontab定时执行`pm2 restart app`，本地`sync.sh`推送，服务器端实时更新文章～
-#### 在Shell中执行Ctrl - C
-
-    CTRL-A \001   十进制1
-    CTRL-B \002   十进制2
-    ....
-    CTRL-Z \032   十进制26
-    那么`echo -e "\003"` 代表在Shell中输入Ctrl - C
-
-添加`echo -e "\003"`到deploy.sh最后就可以达到本地推送完成之后自动退出VPS的Shell连接
-
-<br>
 > **这个打赏二维码好像有什么不对**
 
 **支付宝** 
