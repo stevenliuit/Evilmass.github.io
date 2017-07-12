@@ -189,6 +189,22 @@ crond是Centos系统的 一个服务，也就也就意味着：**crontab -e之�
 重启 Nginx：
 
     service nginx restart
+    
+<br>
+### GZip
+
+`vim /etc/nginx/nginx.conf`
+    
+    http {
+        gzip on; #开启Gzip
+        gzip_min_length  1k;  #当返回内容大于此值时才会使用gzip进行压缩,以K为单位,当值为0时，所有页面都进行压缩
+        gzip_buffers     4 16k;  #gzip文件缓存大小
+        gzip_http_version 1.0;
+        gzip_comp_level 6;  #gzip压缩等级，数值越高压缩得越狠，也越占资源
+        gzip_types  text/plain application/x-javascript text/css application/xml;  #gzip压缩文件格式，以下涵盖了一般所需的类型
+        gzip_vary on;  #跟Squid等缓存服务有关，on的话会在Header里增加"Vary: Accept-Encoding"
+        gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+    }
 
 <br>
 ### 本地配置
@@ -259,22 +275,6 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 
     pm2 start deploy.js #启动服务
 <br>
-### GZip
-
-`vim /etc/nginx/nginx.conf`
-    
-    http {
-        gzip on; #开启Gzip
-        gzip_min_length  1k;  #当返回内容大于此值时才会使用gzip进行压缩,以K为单位,当值为0时，所有页面都进行压缩
-        gzip_buffers     4 16k;  #gzip文件缓存大小
-        gzip_http_version 1.0;
-        gzip_comp_level 6;  #gzip压缩等级，数值越高压缩得越狠，也越占资源
-        gzip_types  text/plain application/x-javascript text/css application/xml;  #gzip压缩文件格式，以下涵盖了一般所需的类型
-        gzip_vary on;  #跟Squid等缓存服务有关，on的话会在Header里增加"Vary: Accept-Encoding"
-        gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
-    }
-
-<br>
 ### 文章更新工作流
 在本地`sync.sh`写入一行
 > ssh root@host -p port 'sh ./deploy.sh'  
@@ -292,7 +292,6 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 
 添加`echo -e "\003"`到deploy.sh最后就可以达到本地推送完成之后自动退出VPS的Shell连接
 <br>
-
 ### 备份
 
 > Hexo根目录下的`_config.yml`
@@ -340,7 +339,6 @@ Hexo目录包含hexo的运行环境，我们并不需要把这些文件都推送
 ##### 更多细节请参考[qshell官方文档][qshell官方文档]
 
 <br>
-
 > **这个打赏二维码好像有什么不对**
 
 **支付宝** 
