@@ -8,7 +8,7 @@ tags: Linux
 
 <!--more-->
 
-### Require
+### Requirement
 #### 域名设置主机记录
 ![主机记录][2]
 如果没有**`*`**记录的话会被重定向至主机，无法打开隧道页面
@@ -204,52 +204,17 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 
 这样就可以通过`raspberry.evilmass.cc:6062`访问树莓派上的80端口对应的服务。（树莓派可以直接安装一个nginx， `apt-get install nginx` 然后默认80端口就可以显示nginx默认的页面）
 
-### 拿Python写个MHP Tunnel Server脚本来玩一下
+### 建个MHP Tunnel Server玩一下
 今天找到了`mhptunnel_unixsv4.zip`，Unix下的MHP Tunnel，make之后执行./sv 30000 &就可以启动服务器端。**But！**连上去之后不停的重新登录-掉线-登录-掉线。。。估计是版本太旧了
 如果你们仔细找找的话，在MHP Tunnel目录下面是有个服务端启动工具的，长这样：
 ![1][4]
-打开之后有如下参数：
+打开这个程序并在PSP Tunnel创建服务器，端口默认30000，Ngrok转发TCP
+![30000][30000]
 
-    MHP Tunnel Server Ver0.8.7.5 by Pensil
-    Protocol Ver0.8.7 by Pensil
-    Usage: TunnelSVR port [adminid] [announce] [name] [desc] [hr] [maxuser] [lcid]
-    
-    port:        port number
-    adminid:     admin uuid (default: NULL)
-    export:      set 1 to announce (default: 0)
-    name:        admin nickname (default: read from TunnelSVR.ini)
-    desc:        server description (default: read from TunnelSVR.ini)
-    hr:          hunter rank (default: read from TunnelSVR.ini)
-    maxuser:     max users (default: read from TunnelSVR.ini)
-    lcid:        default lcid (default: read from TunnelSVR.ini)
+Done！
 
-也就是说只要一台有Windows系统且有公网ip的服务器运行了这个程序，设定好了port、export=1，别人就可以看到你的服务器了，跑偏了。。。
-
-Server.py
-
-    # !/usr/bin/env python3
-    # -*- coding:utf-8 -*-
-
-    import os
-    import subprocess
-
-    command1 = "tunnelsvr.exe"
-    command2 = "ngrok.exe -log=\"ngrok_log.txt\" -config=\"ngrok.cfg\" start mhp"
-    
-    os.chdir("C:\\Users\\Evilmass1ve\\Desktop\\RaspberryPi\\PSPTunnel\\PSPTunnel大陆修改版[5-4SSID增加版本]\\")
-    subprocess.Popen(command1, shell = True)
-    
-    os.chdir("C:\\Users\\Evilmass1ve\\Desktop\\RaspberryPi\\Software\\ngrok\\cc")
-    subprocess.Popen(command2, shell = True)
-
-
-Popen使用时shell参数的设，一般情况下，需要加上shell = True
-最后`pyinstaller Server.py`，一键什么的，整个世界都美好了
 **懒才是推动科技发展的动力啊**
 
-
-### 待补充的内容
-后面准备补充一下使用supervisor来保持服务一直运行，在服务端和客户端都需要配置一下，维持服务稳定。
 
 <br><br>
 > **这个打赏二维码好像有什么不对**
@@ -270,3 +235,4 @@ Popen使用时shell参数的设，一般情况下，需要加上shell = True
   [多隧道设置]: https://of4jd0bcc.qnssl.com/ngrok/%E5%A4%9A%E9%9A%A7%E9%81%93%E8%AE%BE%E7%BD%AE.png
   [两步认证]: https://of4jd0bcc.qnssl.com/ngrok/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81.png
   [测试隧道]: https://of4jd0bcc.qnssl.com/ngrok/%E6%B5%8B%E8%AF%95%E9%9A%A7%E9%81%93.png
+  [30000]: https://of4jd0bcc.qnssl.com/ngrok/30000.png
