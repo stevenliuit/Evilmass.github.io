@@ -10,7 +10,8 @@ tags: MHP
 <!--more-->
 
 ## 所需工具
-https://pan.baidu.com/
+链接：http://pan.baidu.com/s/1nv1F55v
+
 经过大量玩家反馈，在联机过程中经常会出现掉线问题
 
 ### 掉线相关
@@ -184,6 +185,7 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
         无法开启网卡 Realtek RTL8192EU Wireless LAN 802.11n USB 2.0 Network Adapter。
 
     第一种情况：你没有安装Winpcap
+    第二种情况：你之前安装的Winpcap版本太高（V4.1.2或者V4.1.3），卸载原来的Winpcap重启电脑再安装V4.0.2即可
     第二种情况：未将无线网卡的 PSP Link Mode 设置为Enable
     第三种情况：无线网卡的 XP 驱动不能在该系统正常工作（装完驱动蓝屏），换张网卡或者USB吧
 
