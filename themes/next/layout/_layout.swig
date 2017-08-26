@@ -52,7 +52,7 @@
     </footer>
 
     <div class="back-to-top">
-      <script>
+<!--       <script>
         var OriginTitile=document.title;
         var st;
         document.addEventListener('visibilitychange',function(){
@@ -69,7 +69,7 @@
           console.log('endChange=');
         }
         });
-      </script>
+      </script> -->
       <i class="fa fa-arrow-up"></i>
     </div>
   </div>
