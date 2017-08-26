@@ -3,7 +3,7 @@ title: Django 最佳化实践
 date: 2017-08-26 19:04:50
 tags: Python
 ---
-```python
+
 ![django-model][django-model]
 <br>
 **东西只有在用的时候学的最快**
@@ -15,7 +15,7 @@ tags: Python
 MySQL、MongoDB、SQLite都试过，后来还是选了MySQL，数据量小的项目还是SQLite好用，还不用装额外的库
 上一篇我们获取到了形如 **IP:PORT** 的代理，那么从最简单的开始：创建数据库并插入一条数据
 
-
+```python
     mysql -uroot -p
     
     create database django;
@@ -27,7 +27,7 @@ MySQL、MongoDB、SQLite都试过，后来还是选了MySQL，数据量小的项
     use django;
     
     insert into httpProxy(proxyAddress) values ('1.1.1.1:8080');
-
+```
 ![create][create]
 <br>
     
