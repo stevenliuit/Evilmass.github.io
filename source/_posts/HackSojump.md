@@ -16,7 +16,7 @@ tags: Hack
 <!--more-->
 
 ## 随机获取答案
-```python
+
     def get_post_data():
         try:
             tmp_data = []
@@ -73,8 +73,7 @@ tags: Hack
         result = pool.map_async(single_post, proxies)
         pool.close()
         pool.join()
-```
-<br>
+
 ## 为什么没有多线程
 其实是有的，而且线程数控制在 50 就可以了，只是。。。
 
@@ -88,7 +87,7 @@ tags: Hack
 这里安利一个免费代理网站：[GatherProxy][GatherProxy]，**需要梯子**注册个账号，一次大概能获取到 200+ 的 HTTP 代理和 1000+ 的 Socks 代理（可用），然而懒人表示连登录的验证码都懒得填，于是乎发现 POST 登陆不需要验证码（WTF？？？
 <br>
 ### 取消验证码登陆
- ```python   
+    
     def login():
         with requests.Session() as tmp:
             final = None
@@ -247,8 +246,7 @@ tags: Hack
                 filtered_ip_count += 1
         print('filtered ip counts: -> %s' % filtered_ip_count)
         return filter_lists
-```
-<br>
+
 ## To Do
 保存可用代理到数据库和 Django 展示在下一篇文章更新，问卷星刷卷不是重点，重点是突发奇想的想建立并维护一个长期可用的代理池，提供 API，要用的时候就取出来
 
