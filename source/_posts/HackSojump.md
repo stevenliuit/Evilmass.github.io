@@ -11,6 +11,8 @@ tags: Hack
 2. 云打码识别验证码进行刷卷
 
 限于篇幅，云打码刷卷的代码请在Github查阅，喜欢的请给个 Star
+![sojump][sojump]
+
 <!--more-->
 
 ## 随机获取答案
@@ -250,5 +252,6 @@ tags: Hack
 
 一个问卷星脚本让我接触到了 **Flask、Bootstrap 和 Django**，也算不错的收获了
 
+[sojump]: https://of4jd0bcc.qnssl.com/pip/sojump.png
 [HackSojump]: https://github.com/Evilmass/HackSojump
 [GatherProxy]: http://www.gatherproxy.com/zh/
