@@ -4,8 +4,6 @@ date: 2017-08-26 13:27:54
 tags: Hack
 ---
 
-# HackSojump
-
 项目地址：[HackSojump]
 
 问卷星 Python 脚本
