@@ -60,7 +60,7 @@ APP 是指完成一些功能的 Web 应用，比如博客系统,公共记录的�
 <br>
 PS. 因为这里用的是 Python 3 版本的 pymysql，所以要将 djgon 默认调用 Python 2 版本的 MySQLdb 替改为 pymysql
 
-在 mysite\\__init__.py 文件中添加
+在 mysite\\_\_init\_\_.py 文件中添加
 
     import pymysql
     pymysql.install_as_MySQLdb() 
