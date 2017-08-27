@@ -1,18 +1,20 @@
 ---
-title: virtualenv 与 pip 简明使用教程
+title: VirtualenvWrapper 与 pip 简明使用教程
 date: 2017-08-25 17:12:08
 tags: Python
 ---
 
-**有经验的 Pythoner 应尽可能写出兼容 2 和 3 环境的代码**
+**有经验的 Pythoner 应尽可能写出兼容 2 和 3 的代码**
 
-作为 Python 版本管理器，使用 Virtualenv 是为了防止工作环境的库之间的冲突，保证一个项目对应一个生产环境
+使用 virtualenv 能保证一个项目对应一个生产环境，防止宿主环境的库之间的冲突，然而只使用 virtualenv 的一个最大的缺点就是，每次开启虚拟环境之前要去虚拟环境所在目录下的 bin 目录下 source 一下 activate，这就需要我们记住每个虚拟环境所在的目录。
 
+而 VirtualenvWrapper 将所有的虚拟环境目录全都集中起来，方便我们管理由 virtualenv 生成的各种 Python 生产环境
 <!--more-->
 
-## Virtualenv
+## VirtualenvWrapper
+
 ### 安装
-    pip install virtualenv
+    pip install virtualenv virtualenvwrapper-win
 ### 配置两个 Python 环境
 目前工作环境 Python 3.5，临时环境 Python 2.7
 推荐在**非 C 盘**创建两个目录：一个 Python3，一个 Python2。安装 3 时应**勾选添加 Python 到系统环境变量**，安装 2 时则不用
@@ -20,18 +22,24 @@ tags: Python
 ### 在项目目录下创建环境
 PS. 因为命名冲突存在， 所以无法在不同目录下创建两个名字相同的virtualenv环境
 
-    virtualenv -p d:\\python2\\python.exe myProjiect
+    mkvirtualenv myProjiect
     
-### 启动 & 退出环境
+### 列出 & 启动 & 退出环境
+列出所有环境
+
+    lsvirtualenv
+
 启动环境
 
-    myProject\\Scripts\\activate
+    workon myProject
 命令行前出现`(myProject)`字样表示环境启动成功
 ![env][env]
 
 退出环境
 
         deactivate
+
+
 ## pip
 ### 基本操作
     Commands:
@@ -65,6 +73,16 @@ Unix 用户： `$HOME/.config/pip/pip.conf`
 
 macOS用户： `$HOME/Library/Application Support/pip/pip.conf`
 
+<br>
+### 解决 --format=(legacy|columns) 问题
+
+> DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
+
+在pip.ini写入如下内容
+
+    [list]
+    format=columns
+
 
 <br>
 > **这个打赏二维码好像有什么不对**
@@ -77,3 +95,6 @@ macOS用户： `$HOME/Library/Application Support/pip/pip.conf`
 [env]: https://of4jd0bcc.qnssl.com/pip/pip.png
 [99]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/alipay/%E7%86%8A%E6%9C%AC%E7%86%8A%E8%B6%85%E5%B8%85_alipay.gif?imageView2/1/w/200/h/200
 [100]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/wechat/girl_wechat.gif?imageView2/1/w/200/h/200
+
+
+
