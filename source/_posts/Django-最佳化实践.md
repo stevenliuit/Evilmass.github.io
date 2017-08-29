@@ -15,7 +15,6 @@ tags: Python
 MySQL、MongoDB、SQLite都试过，后来还是选了MySQL，数据量小的项目还是SQLite好用，还不用装额外的库
 上一篇我们获取到了形如 **IP:PORT** 的代理，那么从最简单的开始：创建数据库并插入一条数据
 
-```python
     mysql -uroot -p
     
     create database django;
@@ -27,7 +26,7 @@ MySQL、MongoDB、SQLite都试过，后来还是选了MySQL，数据量小的项
     use django;
     
     insert into httpProxy(proxyAddress) values ('1.1.1.1:8080');
-```
+  
 ![create][create]
 <br>
     
@@ -96,7 +95,7 @@ PS. 因为这里用的是 Python 3 版本的 pymysql，所以要将 django 默�
 <br>
 
 ### 启动
-    python manage.py runserver  # 可以在 runserver 后面添加端口号修改默的认 8000 端口
+    python manage.py runserver  # 可以在 runserver 后面添加端口号以修改默认的 8000 端口
 浏览器打开 `http://127.0.0.1:8080/app` 应该就可以看到 Hello Django 的字样了
 ![hello][hello]
 <br>
@@ -200,7 +199,8 @@ app\views 添加页面渲染处理
 [urls]: https://of4jd0bcc.qnssl.com/Django/urls.png
 [mysite_urls]: https://of4jd0bcc.qnssl.com/Django/mysite_urls.png
 [app_urls]: https://of4jd0bcc.qnssl.com/Django/app_urls.png
-[views]: https://of4jd0bcc.qnssl.com/Django/views.png
+[views_base]: https://of4jd0bcc.qnssl.com/Django/views_base.png
+[html]: https://of4jd0bcc.qnssl.com/Django/html.png
 [hello]: https://of4jd0bcc.qnssl.com/Django/hello.png
 [output]: https://of4jd0bcc.qnssl.com/Django/output.png
 [results]: https://of4jd0bcc.qnssl.com/Django/results.png
