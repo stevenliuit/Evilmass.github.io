@@ -18,26 +18,28 @@ tags: Hack
 ## 随机获取答案
 
     def get_post_data():
-        try:
-            tmp_data = []
-            duplicate = post_data = {}
-            html = requests.get('https://sojump.com/jq/' + curID + '.aspx', verify=False)
-            num_reg = "id='div(.*?)'"
-            num = re.findall(num_reg, html.text, re.S)[-1].split('_')[0].strip('question')  # 题目总数
-            topic_reg = "rel='q(.*?)'"
-            topic = re.findall(topic_reg, html.text, re.S)
-            for t in topic:
-                duplicate[str(t.split('_')[0])] = str(t.split('_')[1])  # 题目选项最大序号
-            for x in range(1, int(num)):
-                answer = choice(('1', duplicate[str(x)]))  # 随机答案
-                tmp_data.append(str(x) + '$' + answer + '}')
-            tmp_data.append(num + '$' + '1')  # 最后一个答案不需要"}"
-            post_data = {'submitdata': ''.join(tmp_data)}
-            return post_data
-            # 自定义问卷数据
-            # return {'submitdata': '1$2'}  
-        except Exception as e:
-            raise e
+        tmp_data = []
+        duplicate = {}
+        html = requests.get('https://sojump.com/jq/' + curID + '.aspx', verify=False)
+        num_reg = "id='div(.*?)'"
+        num = re.findall(num_reg, html.text, re.S)[-1].split('_')[0].strip('question')  # 题目总数
+        topic_reg = "rel='q(.*?)'"
+        topic = re.findall(topic_reg, html.text, re.S)
+        for t in topic:
+            duplicate[str(t.split('_')[0])] = str(t.split('_')[1])  # 题目选项最大序号
+        for x in range(1, int(num)+1):
+            tmp = []
+            for y in range(1, int(duplicate[str(x)])+1):
+                tmp.append(str(y))
+            answer = random.choice(tmp)  # 随机答案
+            tmp_data.append(str(x) + '$' + answer + '}')
+        tmp_data[-1] = tmp_data[-1].split('}')[0]
+        # 带加权平均概率的答案选项
+        # tmp_data[1] =  '2$' + excepted_answer(['1', '2'], [0.8, 0.2]) + '}'
+        post_data = {'submitdata': ''.join(tmp_data)}
+        return post_data
+
+<br>
 ## 单次提交
 
     def single_post(proxy):
