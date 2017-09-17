@@ -7,10 +7,10 @@ tags: Openwrt
 这大概是我遇到过持续时长最久的一个坑了
 ![nana][nana]
 
+<!--more-->
 ## 问题描述
 网线直连电脑分配到了DNS服务器，可以直接访问学校的内部更新源和协会网站。本地网络连接的 DNS 服务器解析地址正常，但用路由器之后无论怎么改路由器 DNS 或者改本地无线网卡的 DNS 都打不开
-
-<!--more-->
+<br>
 ## 关键字： Prevent DNS-rebind attacks
 –stop-dns-rebind
 
