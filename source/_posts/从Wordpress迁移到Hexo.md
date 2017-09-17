@@ -1,7 +1,7 @@
 ---
 title: 从Wordpress迁移到Hexo
 date: 2017-02-06 00:34:48
-tags: Linux
+tags: Wordpress
 ---
 
 ### 前言

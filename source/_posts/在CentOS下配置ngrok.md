@@ -1,7 +1,7 @@
 ---
 title: 在CentOS下配置ngrok
 date: 2017-01-25 00:54:58
-tags: Linux
+tags: 杂
 ---
 
 ![1][1]

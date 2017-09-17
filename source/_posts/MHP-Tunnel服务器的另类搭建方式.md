@@ -1,7 +1,8 @@
 ---
 title: MHP Tunnel服务器的另类搭建方式
 date: 2017-01-22 00:00:06
-tags: Video Game
+tags: 
+    - Game
 ---
 
 ## 前言

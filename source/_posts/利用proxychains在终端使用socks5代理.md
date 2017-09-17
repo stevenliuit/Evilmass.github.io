@@ -1,7 +1,7 @@
 ---
 title: 利用proxychains在终端使用socks5代理
 date: 2017-01-18 12:09:59
-tags: Linux
+tags: 杂
 ---
 
 **配置测试环境没有梯子怎么行= w =**

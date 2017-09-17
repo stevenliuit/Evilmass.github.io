@@ -1,7 +1,7 @@
 ---
-title: Windows配置Github多用户
+title: Windows 配置 Github多用户
 date: 2017-05-27 15:00:26
-tags: Linux
+tags: Github
 ---
 
 ## 取消全局用户设定

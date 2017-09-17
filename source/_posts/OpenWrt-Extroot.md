@@ -1,7 +1,7 @@
 ---
 title: OpenWrt Extroot
 date: 2017-04-13 13:45:23
-tags: Linux
+tags: Openwrt
 ---
 
 overlay的展现形式，按照 Openwrt 文档上的描述，其实是有两种:

@@ -1,7 +1,9 @@
 ---
 title: Django 最佳化实践
 date: 2017-08-26 19:04:50
-tags: Python
+tags: 
+    - Python
+    - Django
 ---
 
 ![django-model][django-model]

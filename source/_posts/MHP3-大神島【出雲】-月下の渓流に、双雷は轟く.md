@@ -1,7 +1,8 @@
 ---
 title: ' MHP3-大神島【出雲】-月下の渓流に、双雷は轟く'
 date: 2016-10-19 14:01:22
-tags: Video Game
+tags: 
+    - Game
 ---
 
 道具流么？请看这里:[道具流实战新编](http://bbs.duowan.com/thread-19067124-1-1.html)

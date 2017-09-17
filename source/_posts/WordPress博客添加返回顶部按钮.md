@@ -1,7 +1,7 @@
 ---
-title: WordPress博客添加返回顶部按钮
+title: WordPress 博客添加返回顶部按钮
 date: 2017-01-24 23:22:58
-tags: 杂
+tags: Wordpress
 ---
 
 当Wordpress文章较长或者评论较多导致页面较长时，如果要从下端位置返回顶端，使用鼠标滚轮是非常不方便的，这时就需要添加一个返回顶部按钮

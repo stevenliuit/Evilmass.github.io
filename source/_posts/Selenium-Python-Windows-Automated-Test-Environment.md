@@ -1,7 +1,8 @@
 ---
 title: Selenium + Python + Windows = Automated Test Environment
 date: 2017-01-15 16:09:44
-tags: 爬虫
+tags:
+    - Python
 ---
 
 ### Selenium

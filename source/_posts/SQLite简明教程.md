@@ -1,7 +1,8 @@
 ---
 title: SQLite简明教程
 date: 2017-01-14 01:39:34
-tags: 爬虫
+tags: 
+    - SQLite
 ---
 
 | Python type        | SQLite type |
