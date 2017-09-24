@@ -73,7 +73,31 @@ tags: 杂
 
     cd /root/ngrok
     make release-server
-    
+
+    # Windows服务端
+    GOOS=windows GOARCH=386 make release-server
+    GOOS=windows GOARCH=amd64 make release-server
+    # Linux服务端
+    GOOS=linux GOARCH=386 make release-server
+    GOOS=linux GOARCH=amd64 make release-server
+    # MacOS服务端
+    GOOS=darwin GOARCH=386 make release-server
+    GOOS=darwin GOARCH=amd64 make release-server
+     #ARM服务端
+    GOOS=linux GOARCH=arm make release-server
+ 
+服务端命令
+
+    --help 查看帮助
+    -domain 域名，已去掉证书验证可以使用ip，仅作tcp转发可以使用ip
+    -httpAddr HTTP连接，空字符串禁用 (default ":80")
+    -httpsAddr HTTPS连接，空字符串禁用 (default ":443")
+    -log 写消息记录到该文件。 “标准输出”和“无”具有特殊意义 (default "stdout")
+    -log-level 消息的级别记录。其中之一：DEBUG，INFO，WARNING，ERROR (default "DEBUG")
+    -tlsCrt TLS证书文件路径
+    -tlsKey TLS key证书文件路径
+    -tunnelAddr 公共广播监听ngrok客户端 (default ":4443")
+   
 > 如果安装的时候卡在了**gopkg.in/inconshreveable/go-update.v0 (download)**或者卡在**gopkg.in/yaml.v1 (download)**，则代表需要安装新的git
 注意git版本应大于1.7.9.5
 源码编译安装请参考：[安装Git][3]
@@ -109,13 +133,28 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 **GOOS**：Target Host OS
 **GOARCH**：Target Host ARCH
 
-> Linux 平台 32 位系统：GOOS=linux GOARCH=386
-  Linux 平台 64 位系统：GOOS=linux GOARCH=amd64
-  Windows 平台 32 位系统：GOOS=windows GOARCH=386
-  Windows 平台 64 位系统：GOOS=windows GOARCH=amd64
-  MAC 平台 32 位系统：GOOS=darwin GOARCH=386
-  MAC 平台 64 位系统：GOOS=darwin GOARCH=amd64
-  ARM 平台：GOOS=linux GOARCH=arm
+    # Windows客户端
+    GOOS=windows GOARCH=386 make release-client
+    GOOS=windows GOARCH=amd64 make release-client
+    # Linux客户端
+    GOOS=linux GOARCH=386 make release-client
+    GOOS=linux GOARCH=amd64 make release-client
+    # MacOS客户端
+    GOOS=darwin GOARCH=386 make release-client
+    GOOS=darwin GOARCH=amd64 make release-client
+    # ARM客户端
+    GOOS=linux GOARCH=arm make release-client
+ 
+ 客户端命令
+ 
+    --help 查看帮助
+    -config 配置文件路面
+    -hostname 自定义域名
+    -log 日志的路径，非必须
+    -log-level 日志级别：DEBUG，INFO，WARNING，ERROR (default "DEBUG")
+    -proto 隧道协议 http、https、tcp、默认为http和https
+    -server_addr 服务器地址
+    -subdomain 子域名，当服务器配有域名启动的时候带上固定服务器分配的前缀域名，对应域名在服务端启动的-domain
   
 通过前面的步骤，就会在bin目录里面生成所有的客户端文件，客户端平台是文件夹的名字（windows_amd64），客户端放在对应的目录下。
 没有错误的话，Windows客户端ngrok就编译成功了，我们可以在./bin/windows_amd64/目录下找到执行文件ngrok.exe。将其下载到Windows上。
@@ -204,7 +243,16 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
 
 这样就可以通过`raspberry.evilmass.cc:6062`访问树莓派上的80端口对应的服务。（树莓派可以直接安装一个nginx， `apt-get install nginx` 然后默认80端口就可以显示nginx默认的页面）
 
+### 建个MHP Tunnel Server玩一下
+今天找到了`mhptunnel_unixsv4.zip`，Unix下的MHP Tunnel，make之后执行./sv 30000 &就可以启动服务器端。**But！**连上去之后不停的重新登录-掉线-登录-掉线。。。估计是版本太旧了
+如果你们仔细找找的话，在MHP Tunnel目录下面是有个服务端启动工具的，长这样：
+![1][4]
 
+打开这个程序并在PSP Tunnel创建服务器，端口默认30000，Ngrok转发TCP
+
+![30000][30000]
+
+Done！
 **懒才是推动科技发展的动力啊**
 
 
@@ -221,8 +269,10 @@ go开发环境为我们提供了强大的跨平台交叉编译功能，在Linux�
   [1]: https://of4jd0bcc.qnssl.com/ngrok/ngrok.png
   [2]: https://of4jd0bcc.qnssl.com/ngrok/%E4%B8%BB%E6%9C%BA%E8%AE%B0%E5%BD%95.png
   [3]: https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
+  [4]: https://of4jd0bcc.qnssl.com/ngrok/tunnelsvr.png
   [5]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/alipay/dmc.gif?imageView2/1/w/200/h/200
   [6]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/wechat/girl_wechat.gif?imageView2/1/w/200/h/200
   [多隧道设置]: https://of4jd0bcc.qnssl.com/ngrok/%E5%A4%9A%E9%9A%A7%E9%81%93%E8%AE%BE%E7%BD%AE.png
   [两步认证]: https://of4jd0bcc.qnssl.com/ngrok/%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81.png
   [测试隧道]: https://of4jd0bcc.qnssl.com/ngrok/%E6%B5%8B%E8%AF%95%E9%9A%A7%E9%81%93.png
+  [30000]: https://of4jd0bcc.qnssl.com/ngrok/30000.png
