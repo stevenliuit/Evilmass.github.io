@@ -25,7 +25,7 @@ overlay的展现形式，按照 Openwrt 文档上的描述，其实是有两种:
  
 这里只分了 extroot 和 swap
 
-windows分区 端推荐使用 `MiniTool Partition Wizard` 工具
+windows 分区推荐使用 `MiniTool Partition Wizard` 工具
 
 ![Partition][Partition]
 <br>
@@ -97,3 +97,4 @@ auto_swap 和 auto_mount 都设置为0，如果置为1的话，那么系统就�
 [微信]: https://of4jd0bcc.qnssl.com/Blog/%E6%89%93%E8%B5%8F/wechat/girl_wechat.gif?imageView2/1/w/200/h/200
 
 [Partition]: https://of4jd0bcc.qnssl.com/Openwrt/Partition.png
+
