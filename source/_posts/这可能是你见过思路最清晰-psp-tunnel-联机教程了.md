@@ -1,13 +1,14 @@
 ---
-title: 这可能是你见过最详细的 psp tunnel 联机教程
+title: 这可能是你见过思路最清晰 psp tunnel 联机教程了
 date: 2017-08-04 21:48:39
 tags: Game
 ---
 
 ## 写在最前面
-向时至今日仍坚守 PSP 战线的猎人致敬
+时至今日仍坚守 PSP 战线的猎人都值得我们尊敬
 
 <!--more-->
+
 
 ## 所需工具
 链接：http://pan.baidu.com/s/1nv1F55v
@@ -15,6 +16,17 @@ tags: Game
 经过大量玩家反馈，在联机过程中经常会出现掉线问题
 
 ### 掉线相关
+### UPDATE ！ ！ ！ 目前最简单有效的防掉线方法
+某日联机的时候开着迅雷下载东西（没资源速度不快）忘了关，联了几盘才发现没挂 YY，然后在 MHP Tunnel 的 NAT 一栏发现多了两个迅雷的端口，于是关闭迅雷之后随便填了个 6666 端口
+
+![6666nat][6666nat]
+
+软件设定这里的 UPNP Gateway 这里要勾选上，以及路由器的 UPNP 功能也一定要打开，然后就应该可以看到转发的 UPNP 端口了
+
+![open_upnp][open_upnp]
+
+然后打了 5 盘下来也没有见掉线，神奇~
+
 #### 传统防掉线方法
 
     开两个 QQ 互相语音亦或者下载 YY 随便进入一个频道
@@ -30,7 +42,8 @@ tags: Game
     为什么是 MHP Tunnel 呢？
         因为无论是什么版本的 PSP Tunnel 设置缓存为多少都会掉线（非常玄学
 
-时至今日大部分教程仍然是用USB联机的方式，我个人比较推荐无线联机
+
+时至今日大部分教程仍然是用USB联机的方式，我个人比较推荐**无线联机**
 
 1. 不用受USB线长限制活动
 2. 不用担心碰到USB线导致掉线
@@ -225,3 +238,5 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
 [km_test]: https://of4jd0bcc.qnssl.com/psp_tunnel/km_test.png
 [rally]: https://of4jd0bcc.qnssl.com/psp_tunnel/rally.png
 [auto_search]: https://of4jd0bcc.qnssl.com/psp_tunnel/auto_search.png
+[6666nat]: https://of4jd0bcc.qnssl.com/psp_tunnel/6666nat.png
+[open_upnp]: https://of4jd0bcc.qnssl.com/psp_tunnel/open_upnp.png
