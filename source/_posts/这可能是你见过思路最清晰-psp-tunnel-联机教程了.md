@@ -182,7 +182,7 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
 然后进入在线集会所，无线网卡连接上 PSP 游戏发出的 WIFI 信号（PSP_AULJM05800_L_MHP3Q000），Tunnel选择无线网卡，成功联机
 
 ## FAQ
-1. 如何切换集会所房间？
+1. 如何切换集会所房间
     -> 设定
     -> 网卡选择（找不到无线网卡 (只能聊天)）
     -> 确定（退出房间）
@@ -193,7 +193,7 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
     这样的操作不会在旧集会所留下自己记录，如若切换房间留下记录（直接改房间号码），别人将无法进入之前的房间补上空位，需要其余3人重新进入集会所清除完你留下的记录。
 这个基本操作是联机过程中的的好习惯~
 
-2. Winpcap开启失败？
+2. Winpcap开启失败
 
         WinPcap初始化失败。
         WinPcap read handle initialize failed
@@ -205,12 +205,19 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
     第二种情况：未将无线网卡的 PSP Link Mode 设置为Enable
     第三种情况：无线网卡的 XP 驱动不能在该系统正常工作（装完驱动蓝屏），换张网卡或者USB吧
 
-3. 一直显示 Searching PSP USB Device？
+3. 一直显示 Searching PSP USB Device
     Winpcap 是否安装？
     PSP Type B 驱动是否安装？
     虚拟网卡的序号选择是否正确？
     AdHocToUSB.prx 是否复制到 PSP 的 seplugins 目录？
     AdhocToUSB.prx 插件是否开启？
+
+4. Tunnel 打开显示 Access violation at address 错误
+    ![access_error][access_error]
+
+    软件兼容性问题，选择 XP 的 SP3 兼容模式运行即可
+    
+    ![xp_sp3][xp_sp3]
     
 ### 后续研究
 1. 防掉线机制
@@ -240,3 +247,5 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
 [auto_search]: https://of4jd0bcc.qnssl.com/psp_tunnel/auto_search.png
 [6666nat]: https://of4jd0bcc.qnssl.com/psp_tunnel/6666nat.png
 [open_upnp]: https://of4jd0bcc.qnssl.com/psp_tunnel/open_upnp.png
+[access_error]: https://of4jd0bcc.qnssl.com/psp_tunnel/access_error.png
+[xp_sp3]: https://of4jd0bcc.qnssl.com/psp_tunnel/xp_sp3.png
