@@ -218,6 +218,9 @@ PSPGO添加     ef0:/AdhocToUSB.prx 1
     软件兼容性问题，选择 XP 的 SP3 兼容模式运行即可
     
     ![xp_sp3][xp_sp3]
+
+5. Tunnel右边联机列表有名字，但进集会所看不到人
+    无线网卡 PSP Xlink Mode 设置为 Enable
     
 ### 后续研究
 1. 防掉线机制
